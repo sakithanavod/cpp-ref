@@ -38,6 +38,16 @@
     --safe-bg: rgba(62,207,142,0.12);
     --concur: #4f9cf9;
     --concur-bg: rgba(79,156,249,0.12);
+    --fund: #f472b6;
+    --fund-bg: rgba(244,114,182,0.12);
+    --build: #34d399;
+    --build-bg: rgba(52,211,153,0.12);
+    --stdlib: #fb923c;
+    --stdlib-bg: rgba(251,146,60,0.12);
+    --idioms: #e879f9;
+    --idioms-bg: rgba(232,121,249,0.12);
+    --tooling: #67e8f9;
+    --tooling-bg: rgba(103,232,249,0.12);
 
     --nav-w: 240px;
     --radius: 8px;
@@ -388,6 +398,56 @@
   </div>
 
   <div class="nav-section">
+    <div class="nav-section-label">Fundamentals</div>
+    <a class="nav-link" href="#fund-how-cpp-works"><span class="nav-dot" style="background:var(--fund)"></span>how C++ works</a>
+    <a class="nav-link" href="#fund-lvalues-rvalues"><span class="nav-dot" style="background:var(--fund)"></span>lvalues &amp; rvalues</a>
+    <a class="nav-link" href="#fund-stack-heap"><span class="nav-dot" style="background:var(--fund)"></span>stack vs heap</a>
+    <a class="nav-link" href="#fund-refs-ptrs"><span class="nav-dot" style="background:var(--fund)"></span>refs vs pointers</a>
+    <a class="nav-link" href="#fund-const"><span class="nav-dot" style="background:var(--fund)"></span>const &amp; mutable</a>
+    <a class="nav-link" href="#fund-static"><span class="nav-dot" style="background:var(--fund)"></span>static keyword</a>
+    <a class="nav-link" href="#fund-new"><span class="nav-dot" style="background:var(--fund)"></span>new keyword</a>
+    <a class="nav-link" href="#fund-lifetime"><span class="nav-dot" style="background:var(--fund)"></span>object lifetime</a>
+    <a class="nav-link" href="#fund-funcptr"><span class="nav-dot" style="background:var(--fund)"></span>function pointers</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Standard Library</div>
+    <a class="nav-link" href="#stdlib-containers"><span class="nav-dot" style="background:var(--stdlib)"></span>containers</a>
+    <a class="nav-link" href="#stdlib-iterators"><span class="nav-dot" style="background:var(--stdlib)"></span>iterators</a>
+    <a class="nav-link" href="#stdlib-algorithms"><span class="nav-dot" style="background:var(--stdlib)"></span>algorithms</a>
+    <a class="nav-link" href="#stdlib-ranges"><span class="nav-dot" style="background:var(--stdlib)"></span>ranges &amp; views</a>
+    <a class="nav-link" href="#stdlib-strings"><span class="nav-dot" style="background:var(--stdlib)"></span>strings</a>
+    <a class="nav-link" href="#stdlib-coroutines"><span class="nav-dot" style="background:var(--stdlib)"></span>coroutines</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Idioms &amp; Patterns</div>
+    <a class="nav-link" href="#idioms-typededuction"><span class="nav-dot" style="background:var(--idioms)"></span>type deduction</a>
+    <a class="nav-link" href="#idioms-structbind"><span class="nav-dot" style="background:var(--idioms)"></span>structured bindings</a>
+    <a class="nav-link" href="#idioms-opoverload"><span class="nav-dot" style="background:var(--idioms)"></span>operator overloading</a>
+    <a class="nav-link" href="#idioms-inherit"><span class="nav-dot" style="background:var(--idioms)"></span>inheritance</a>
+    <a class="nav-link" href="#idioms-crtp"><span class="nav-dot" style="background:var(--idioms)"></span>CRTP</a>
+    <a class="nav-link" href="#idioms-typerasure"><span class="nav-dot" style="background:var(--idioms)"></span>type erasure</a>
+    <a class="nav-link" href="#idioms-pimpl"><span class="nav-dot" style="background:var(--idioms)"></span>pimpl</a>
+    <a class="nav-link" href="#idioms-ub"><span class="nav-dot" style="background:var(--idioms)"></span>undefined behaviour</a>
+    <a class="nav-link" href="#idioms-preprocessor"><span class="nav-dot" style="background:var(--idioms)"></span>preprocessor</a>
+    <a class="nav-link" href="#idioms-modules"><span class="nav-dot" style="background:var(--idioms)"></span>modules (C++20)</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Tooling</div>
+    <a class="nav-link" href="#tooling-cmake"><span class="nav-dot" style="background:var(--tooling)"></span>CMake</a>
+    <a class="nav-link" href="#tooling-sanitizers"><span class="nav-dot" style="background:var(--tooling)"></span>sanitizers</a>
+    <a class="nav-link" href="#tooling-debug"><span class="nav-dot" style="background:var(--tooling)"></span>debugging</a>
+    <a class="nav-link" href="#tooling-profiling"><span class="nav-dot" style="background:var(--tooling)"></span>profiling</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Build</div>
+    <a class="nav-link" href="#build-linking"><span class="nav-dot" style="background:var(--build)"></span>static vs dynamic</a>
+  </div>
+
+  <div class="nav-section">
     <div class="nav-section-label">Language</div>
     <a class="nav-link" href="#lang-constructors"><span class="nav-dot" style="background:var(--lang)"></span>constructors</a>
     <a class="nav-link" href="#lang-move"><span class="nav-dot" style="background:var(--lang)"></span>move semantics</a>
@@ -451,6 +511,11 @@
     <button class="filter-btn" data-cat="mem"  style="--c:var(--mem)">memory</button>
     <button class="filter-btn" data-cat="safe" style="--c:var(--safe)">safety</button>
     <button class="filter-btn" data-cat="concur" style="--c:var(--concur)">concurrency</button>
+    <button class="filter-btn" data-cat="fund" style="--c:var(--fund)">fundamentals</button>
+    <button class="filter-btn" data-cat="build" style="--c:var(--build)">build</button>
+    <button class="filter-btn" data-cat="stdlib" style="--c:var(--stdlib)">stdlib</button>
+    <button class="filter-btn" data-cat="idioms" style="--c:var(--idioms)">idioms</button>
+    <button class="filter-btn" data-cat="tooling" style="--c:var(--tooling)">tooling</button>
   </div>
 
   <div id="content-root"></div>
@@ -467,6 +532,11 @@ const CAT_META = {
   mem:    { label:'memory',      color:'var(--mem)',    bg:'var(--mem-bg)'   },
   safe:   { label:'safety',      color:'var(--safe)',   bg:'var(--safe-bg)'  },
   concur: { label:'concurrency', color:'var(--concur)', bg:'var(--concur-bg)'},
+  fund:   { label:'fundamentals',color:'var(--fund)',   bg:'var(--fund-bg)'  },
+  build:  { label:'build',       color:'var(--build)',  bg:'var(--build-bg)' },
+  stdlib: { label:'stdlib',      color:'var(--stdlib)', bg:'var(--stdlib-bg)'},
+  idioms: { label:'idioms',      color:'var(--idioms)', bg:'var(--idioms-bg)'},
+  tooling:{ label:'tooling',     color:'var(--tooling)',bg:'var(--tooling-bg)'},
 };
 
 const DATA = [
@@ -699,8 +769,7 @@ std::<span class="fn">visit</span>([](<span class="kw">auto</span> x){ <span cla
       code:`<span class="kw">void</span> <span class="fn">process</span>(std::<span class="ty">span</span>&lt;<span class="kw">const int</span>&gt; data);
 <span class="fn">process</span>(vec);    <span class="cm">// works with vector/array</span>` },
   ]},
-  { id:'concur-basics', cat:'concur', title:'concurrency basics', concepts:[
-    { name:'std::thread / jthread (C++20)', desc:'jthread auto-joins on destruction and supports stop tokens.',
+  { id:'concur-basics', cat:'concur', title:'concurrency basics', concepts:[    { name:'std::thread / jthread (C++20)', desc:'jthread auto-joins on destruction and supports stop tokens.',
       code:`std::<span class="ty">jthread</span> t([](<span class="ty">std::stop_token</span> st) {
   <span class="kw">while</span> (!st.<span class="fn">stop_requested</span>()) {
     <span class="fn">work</span>();
@@ -722,15 +791,931 @@ counter.<span class="fn">fetch_add</span>(<span class="li">1</span>,
   [] { <span class="kw">return</span> <span class="fn">compute</span>(); });
 <span class="kw">int</span> result = fut.<span class="fn">get</span>();` },
   ]},
+
+  // ── FUNDAMENTALS ──────────────────────────────────────
+  { id:'fund-how-cpp-works', cat:'fund', title:'how C++ works', concepts:[
+    { name:'source → executable pipeline', desc:'C++ is compiled ahead-of-time. Each .cpp file is an independent translation unit (TU).',
+      code:`<span class="cm">// 1. PREPROCESSOR  (.cpp → expanded source)</span>
+<span class="cm">//    #include, #define, #ifdef expanded</span>
+<span class="cm">//    output: a single "compilation unit"</span>
+
+<span class="cm">// 2. COMPILER  (source → object file .o/.obj)</span>
+<span class="cm">//    parses, type-checks, optimises</span>
+<span class="cm">//    emits machine code + symbol table</span>
+g++ -c main.cpp -o main.o
+
+<span class="cm">// 3. LINKER  (objects + libs → binary)</span>
+<span class="cm">//    resolves symbols across TUs</span>
+<span class="cm">//    produces .exe / .so / .a</span>
+g++ main.o util.o -o app` },
+    { name:'translation unit (TU)', desc:'One .cpp file after preprocessing. Each TU is compiled independently — they can only communicate via declared interfaces.',
+      code:`<span class="cm">// foo.h — declaration (shared interface)</span>
+<span class="kw">int</span> <span class="fn">add</span>(<span class="kw">int</span>, <span class="kw">int</span>);
+
+<span class="cm">// foo.cpp — definition (one TU)</span>
+<span class="kw">int</span> <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b) { <span class="kw">return</span> a+b; }
+
+<span class="cm">// main.cpp — another TU, uses declaration</span>
+<span class="cm">#include "foo.h"</span>
+<span class="fn">add</span>(<span class="li">1</span>, <span class="li">2</span>);`, tip:'The One Definition Rule (ODR): a symbol may be declared many times but defined exactly once across all TUs.' },
+    { name:'ODR & inline / templates', desc:'inline functions and templates are exempt from ODR — their definitions must appear in every TU that uses them, so they live in headers.',
+      code:`<span class="cm">// header — ok to define here</span>
+<span class="kw">inline int</span> <span class="fn">square</span>(<span class="kw">int</span> x) { <span class="kw">return</span> x*x; }
+
+<span class="kw">template</span>&lt;<span class="kw">typename</span> <span class="ty">T</span>&gt;
+<span class="ty">T</span> <span class="fn">clamp</span>(<span class="ty">T</span> v, <span class="ty">T</span> lo, <span class="ty">T</span> hi);  <span class="cm">// body in header too</span>` },
+    { name:'compilation flags cheatsheet',
+      code:`g++ -std=c++20   <span class="cm"># language version</span>
+     -O2          <span class="cm"># optimisation level (0-3, s, fast)</span>
+     -Wall -Wextra<span class="cm"># enable warnings</span>
+     -g           <span class="cm"># debug symbols</span>
+     -fsanitize=address,undefined  <span class="cm"># ASan+UBSan</span>
+     -fPIC        <span class="cm"># position-independent (for .so)</span>
+     -DNDEBUG     <span class="cm"># disable assert()</span>` },
+    { name:'build systems', desc:'Raw g++ commands don\'t scale. Use a build system.',
+      code:`<span class="cm"># CMake (most common)</span>
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+
+<span class="cm"># Meson, Bazel, xmake are alternatives</span>
+<span class="cm"># vcpkg / Conan for package management</span>` },
+  ]},
+
+  { id:'fund-lvalues-rvalues', cat:'fund', title:'lvalues & rvalues', concepts:[
+    { name:'value categories overview', desc:'Every expression has a type AND a value category. The category controls how the value can be used and moved.',
+      code:`<span class="cm">// lvalue  — has an address, can be on left of =</span>
+<span class="kw">int</span> x = <span class="li">42</span>;      <span class="cm">// x is an lvalue</span>
+<span class="kw">int</span>* p = &amp;x;      <span class="cm">// can take address of lvalue</span>
+
+<span class="cm">// rvalue  — temporary, no persistent address</span>
+<span class="kw">int</span> y = x + <span class="li">1</span>;   <span class="cm">// x+1 is an rvalue</span>
+<span class="cm">// int* q = &amp;(x+1); // error — can't take address</span>` },
+    { name:'full value category tree', desc:'C++11 refined the taxonomy into five categories.',
+      code:`<span class="cm">/*        expression
+           /         \\
+        glvalue      rvalue
+        /    \\      /    \\
+    lvalue  xvalue  prvalue
+                           */</span>
+
+<span class="cm">// lvalue  — named variable, deref ptr, subscript</span>
+<span class="cm">// prvalue — literal, arithmetic expr, lambda</span>
+<span class="cm">// xvalue  — std::move(x), expiring object</span>
+<span class="cm">// glvalue = lvalue | xvalue</span>
+<span class="cm">// rvalue  = prvalue | xvalue</span>` },
+    { name:'lvalue reference (T&)', desc:'Binds to lvalues only. Extends lifetime when const.',
+      code:`<span class="kw">int</span> x = <span class="li">5</span>;
+<span class="kw">int</span>&amp; r = x;          <span class="cm">// ok — x is lvalue</span>
+<span class="cm">// int&amp; r2 = 5;     // error — 5 is rvalue</span>
+<span class="kw">const int</span>&amp; cr = <span class="li">5</span>;  <span class="cm">// ok — const extends life</span>` },
+    { name:'rvalue reference (T&&)', desc:'Binds to rvalues (temporaries / moved-from). Enables move semantics.',
+      code:`<span class="kw">int</span>&amp;&amp; rr = <span class="li">42</span>;         <span class="cm">// binds to prvalue</span>
+<span class="kw">int</span>&amp;&amp; rr2 = std::<span class="fn">move</span>(x); <span class="cm">// binds via xvalue</span>
+
+<span class="kw">void</span> <span class="fn">sink</span>(<span class="ty">std::string</span>&amp;&amp; s); <span class="cm">// move-only param</span>
+<span class="fn">sink</span>(std::<span class="fn">move</span>(str));       <span class="cm">// caller relinquishes</span>` },
+    { name:'std::move vs std::forward',
+      code:`<span class="cm">// std::move — unconditionally cast to rvalue</span>
+<span class="fn">sink</span>(std::<span class="fn">move</span>(x));      <span class="cm">// x treated as xvalue</span>
+
+<span class="cm">// std::forward — conditional: preserves category</span>
+<span class="kw">template</span>&lt;<span class="kw">typename</span> <span class="ty">T</span>&gt;
+<span class="kw">void</span> <span class="fn">relay</span>(<span class="ty">T</span>&amp;&amp; v) {
+  <span class="fn">sink</span>(std::forward&lt;<span class="ty">T</span>&gt;(v));
+  <span class="cm">// lvalue T → passes as lvalue</span>
+  <span class="cm">// rvalue T → passes as rvalue</span>
+}`, tip:'std::move doesn\'t move anything — it just casts. The actual move happens in the move constructor/assignment.' },
+    { name:'RVO & copy elision', desc:'Compiler eliminates copies of returned prvalues entirely (mandatory since C++17).',
+      code:`<span class="ty">std::string</span> <span class="fn">make</span>() {
+  <span class="kw">return</span> <span class="ty">std::string</span>(<span class="st">"hello"</span>); <span class="cm">// prvalue</span>
+}
+<span class="ty">std::string</span> s = <span class="fn">make</span>(); <span class="cm">// zero copies — RVO</span>`, tip:'Don\'t std::move a local return value — it disables RVO and may make things slower.' },
+  ]},
+
+  { id:'fund-stack-heap', cat:'fund', title:'stack vs heap', concepts:[
+    { name:'stack', desc:'Fixed-size region (usually 1–8 MB). Automatically managed — grows/shrinks with call frames. Very fast allocation.',
+      code:`<span class="kw">void</span> <span class="fn">f</span>() {
+  <span class="kw">int</span> x = <span class="li">42</span>;         <span class="cm">// stack — freed on return</span>
+  <span class="kw">char</span> buf[<span class="li">256</span>];      <span class="cm">// stack array</span>
+}                       <span class="cm">// x and buf destroyed here</span>`, tip:'Stack overflow occurs if you recurse too deeply or declare huge local arrays.' },
+    { name:'heap', desc:'Large region (limited by RAM/OS). Manual or smart-pointer managed. Slower than stack due to allocator overhead.',
+      code:`<span class="kw">int</span>* p = <span class="kw">new int</span>(<span class="li">42</span>);  <span class="cm">// heap — survives scope</span>
+<span class="kw">delete</span> p;               <span class="cm">// must free manually</span>
+
+<span class="kw">auto</span> v = std::<span class="fn">make_unique</span>&lt;<span class="ty">BigObj</span>&gt;();
+<span class="cm">// freed automatically via RAII</span>` },
+    { name:'comparison',
+      code:`<span class="cm">// Stack                  Heap</span>
+<span class="cm">// automatic lifetime      manual / RAII</span>
+<span class="cm">// very fast (pointer bump) slower (allocator)</span>
+<span class="cm">// size known at compile-time  dynamic size</span>
+<span class="cm">// small (MBs)             large (GBs)</span>
+<span class="cm">// no fragmentation        can fragment</span>` },
+  ]},
+  { id:'fund-refs-ptrs', cat:'fund', title:'references vs pointers', concepts:[
+    { name:'references', desc:'An alias — always bound, never null, cannot reseat. Preferred for parameters.',
+      code:`<span class="kw">void</span> <span class="fn">inc</span>(<span class="kw">int</span>&amp; n) { n++; }    <span class="cm">// in-param</span>
+<span class="kw">const int</span>&amp; cr = x;             <span class="cm">// const ref — no copy</span>
+<span class="kw">int</span>&amp;&amp; rr = std::<span class="fn">move</span>(x);      <span class="cm">// rvalue ref</span>` },
+    { name:'pointers', desc:'Holds an address. Can be null, reseated, or do pointer arithmetic. Required for optional or owned resources.',
+      code:`<span class="kw">int</span>* p = &amp;x;          <span class="cm">// point to x</span>
+p = &amp;y;               <span class="cm">// reseat ok</span>
+<span class="kw">if</span> (p != <span class="kw">nullptr</span>) {} <span class="cm">// null check</span>
+p++;                  <span class="cm">// arithmetic</span>` },
+    { name:'key differences',
+      code:`<span class="cm">// Reference    Pointer</span>
+<span class="cm">// never null   can be nullptr</span>
+<span class="cm">// no reseat    can reseat</span>
+<span class="cm">// no arith     supports arith</span>
+<span class="cm">// auto deref   explicit * / -></span>
+<span class="cm">// prefer ref   need ptr for arrays/optional</span>`, tip:'Pass by const ref for read-only params; by pointer only when null is meaningful.' },
+  ]},
+  { id:'fund-const', cat:'fund', title:'const & mutable', concepts:[
+    { name:'const basics',
+      code:`<span class="kw">const int</span> x = <span class="li">42</span>;        <span class="cm">// immutable value</span>
+<span class="kw">const int</span>* p = &amp;x;       <span class="cm">// ptr to const int</span>
+<span class="kw">int</span>* <span class="kw">const</span> q = &amp;x;       <span class="cm">// const ptr to int</span>
+<span class="kw">const int</span>* <span class="kw">const</span> r = &amp;x; <span class="cm">// const ptr to const</span>`, tip:"Read right-to-left: 'const int*' = pointer to const int." },
+    { name:'const member functions', desc:'Promises not to modify the object. Can be called on const instances.',
+      code:`<span class="kw">struct</span> <span class="ty">Vec2</span> {
+  <span class="kw">float</span> x, y;
+  <span class="kw">float</span> <span class="fn">length</span>() <span class="kw">const</span>;  <span class="cm">// read-only</span>
+  <span class="kw">void</span>  <span class="fn">normalise</span>();     <span class="cm">// mutating</span>
+};` },
+    { name:'mutable', desc:'Allows a member to be modified even inside a const method. Use for caches/lazy computation.',
+      code:`<span class="kw">struct</span> <span class="ty">Expensive</span> {
+  <span class="kw">mutable int</span> cache = <span class="li">-1</span>;
+  <span class="kw">int</span> <span class="fn">get</span>() <span class="kw">const</span> {
+    <span class="kw">if</span> (cache &lt; <span class="li">0</span>) cache = <span class="fn">compute</span>();
+    <span class="kw">return</span> cache;
+  }
+};` },
+    { name:'constexpr vs const',
+      code:`<span class="kw">const int</span>     n = <span class="fn">runtime_val</span>(); <span class="cm">// runtime ok</span>
+<span class="kw">constexpr int</span> m = <span class="li">42</span>;            <span class="cm">// compile-time</span>` },
+  ]},
+  { id:'fund-static', cat:'fund', title:'static keyword', concepts:[
+    { name:'static local variable', desc:'Initialised once, lifetime = program. Thread-safe since C++11.',
+      code:`<span class="ty">Logger</span>&amp; <span class="fn">instance</span>() {
+  <span class="kw">static</span> <span class="ty">Logger</span> log; <span class="cm">// created on first call</span>
+  <span class="kw">return</span> log;
+}                      <span class="cm">// Meyer's singleton</span>` },
+    { name:'static class member', desc:'Shared across all instances. Must be defined outside the class (pre-C++17) or use inline.',
+      code:`<span class="kw">struct</span> <span class="ty">Counter</span> {
+  <span class="kw">inline static int</span> count = <span class="li">0</span>; <span class="cm">// C++17</span>
+  <span class="ty">Counter</span>() { count++; }
+};` },
+    { name:'static function / free', desc:'Internal linkage — symbol invisible outside the translation unit.',
+      code:`<span class="cm">// file.cpp</span>
+<span class="kw">static void</span> <span class="fn">helper</span>() { }  <span class="cm">// private to TU</span>
+<span class="cm">// prefer anonymous namespace in C++</span>` },
+    { name:'static member function', desc:'No implicit this pointer. Can only access static members.',
+      code:`<span class="kw">struct</span> <span class="ty">Math</span> {
+  <span class="kw">static double</span> <span class="fn">pi</span>() { <span class="kw">return</span> <span class="li">3.14159</span>; }
+};
+<span class="kw">double</span> p = <span class="ty">Math</span>::<span class="fn">pi</span>();` },
+  ]},
+  { id:'fund-new', cat:'fund', title:'new keyword', concepts:[
+    { name:'new / delete', desc:'Allocates on heap, calls constructor. delete calls destructor then frees.',
+      code:`<span class="ty">Foo</span>* p = <span class="kw">new</span> <span class="ty">Foo</span>(<span class="li">42</span>);   <span class="cm">// alloc + ctor</span>
+<span class="kw">delete</span> p;                <span class="cm">// dtor + free</span>
+p = <span class="kw">nullptr</span>;            <span class="cm">// avoid dangling</span>`, tip:'Prefer make_unique/make_shared — they are exception-safe and leak-proof.' },
+    { name:'new[] / delete[]', desc:'Array forms — always match new[] with delete[].',
+      code:`<span class="kw">int</span>* arr = <span class="kw">new int</span>[<span class="li">10</span>]{};
+<span class="kw">delete</span>[] arr;            <span class="cm">// [] is critical!</span>` },
+    { name:'nothrow new', desc:'Returns nullptr instead of throwing std::bad_alloc.',
+      code:`<span class="ty">Foo</span>* p = <span class="kw">new</span> (std::<span class="ty">nothrow</span>) <span class="ty">Foo</span>();
+<span class="kw">if</span> (!p) { <span class="cm">/* handle OOM */</span> }` },
+    { name:'operator new overload', desc:'Customise allocation per class.',
+      code:`<span class="kw">void</span>* <span class="kw">operator new</span>(<span class="ty">std::size_t</span> n) {
+  <span class="kw">return</span> myPool.<span class="fn">alloc</span>(n);
+}` },
+  ]},
+  { id:'fund-lifetime', cat:'fund', title:'object lifetime', concepts:[
+    { name:'storage durations',
+      code:`<span class="cm">// automatic — local variables, stack</span>
+<span class="kw">void</span> <span class="fn">f</span>() { <span class="ty">Foo</span> a; }
+
+<span class="cm">// static — globals, static locals</span>
+<span class="ty">Foo</span> g;
+<span class="kw">static</span> <span class="ty">Foo</span> s;
+
+<span class="cm">// dynamic — heap via new / smart ptr</span>
+<span class="kw">auto</span> p = std::<span class="fn">make_unique</span>&lt;<span class="ty">Foo</span>&gt;();
+
+<span class="cm">// thread-local (C++11)</span>
+<span class="kw">thread_local</span> <span class="ty">Foo</span> tl;` },
+    { name:'construction order', desc:'Global objects in one TU init top-to-bottom. Order across TUs is unspecified (static init order fiasco).',
+      tip:'Use function-local statics (Meyer\'s singleton) to sidestep cross-TU init order issues.' },
+    { name:'destruction order', desc:'Reverse of construction. Destructors of locals run at end of scope; globals run at program exit.',
+      code:`{
+  <span class="ty">Lock</span> lk(mtx);  <span class="cm">// ctor</span>
+  <span class="fn">doWork</span>();
+}                   <span class="cm">// ~Lock() called here</span>` },
+    { name:'value / temporary lifetime', desc:'Temporaries live until the end of the full expression, unless bound to a const ref (extends to ref\'s scope).',
+      code:`<span class="kw">const</span> <span class="ty">std::string</span>&amp; s = <span class="fn">getTmp</span>();
+<span class="cm">// lifetime extended to match s</span>` },
+  ]},
+  { id:'fund-funcptr', cat:'fund', title:'function pointers', concepts:[
+    { name:'raw function pointer',
+      code:`<span class="kw">int</span> <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b) { <span class="kw">return</span> a+b; }
+
+<span class="kw">int</span> (*fp)(<span class="kw">int</span>,<span class="kw">int</span>) = add;  <span class="cm">// declare</span>
+<span class="kw">int</span> r = <span class="fn">fp</span>(<span class="li">2</span>, <span class="li">3</span>);           <span class="cm">// call</span>
+
+<span class="kw">using</span> <span class="ty">BinOp</span> = <span class="kw">int</span>(*)(<span class="kw">int</span>,<span class="kw">int</span>); <span class="cm">// alias</span>`, tip:'Use typedef/using to make signatures readable.' },
+    { name:'std::function', desc:'Type-erased callable — holds lambdas, functors, free functions, member functions. Has overhead vs raw ptr.',
+      code:`std::<span class="ty">function</span>&lt;<span class="kw">int</span>(<span class="kw">int</span>,<span class="kw">int</span>)&gt; fn = add;
+fn = [](<span class="kw">int</span> a, <span class="kw">int</span> b){ <span class="kw">return</span> a*b; };
+fn(<span class="li">3</span>, <span class="li">4</span>);` },
+    { name:'member function pointer',
+      code:`<span class="kw">struct</span> <span class="ty">Foo</span> { <span class="kw">int</span> <span class="fn">bar</span>(<span class="kw">int</span>); };
+<span class="kw">int</span> (<span class="ty">Foo</span>::*mfp)(<span class="kw">int</span>) = &amp;<span class="ty">Foo</span>::<span class="fn">bar</span>;
+<span class="ty">Foo</span> obj;
+(<span class="kw">obj</span>.*mfp)(<span class="li">5</span>);` },
+    { name:'std::invoke (C++17)', desc:'Uniform call syntax for any callable including member pointers.',
+      code:`std::<span class="fn">invoke</span>(mfp, obj, <span class="li">5</span>);       <span class="cm">// member fn</span>
+std::<span class="fn">invoke</span>(free_fn, <span class="li">1</span>, <span class="li">2</span>);     <span class="cm">// free fn</span>
+std::<span class="fn">invoke</span>(lambda, arg);        <span class="cm">// lambda</span>` },
+  ]},
+
+  // ── BUILD ─────────────────────────────────────────────
+  { id:'build-linking', cat:'build', title:'static vs dynamic linking', concepts:[
+    { name:'static library (.a / .lib)', desc:'Object code copied into your binary at link time. Single self-contained executable, larger binary size.',
+      code:`<span class="cm"># create</span>
+ar rcs libfoo.a foo.o bar.o
+
+<span class="cm"># link</span>
+g++ main.o -L. -lfoo -o app
+<span class="cm"># libfoo.a code baked into app</span>` },
+    { name:'dynamic library (.so / .dll)', desc:'Linked at load time or runtime. Smaller binaries, shared in memory across processes. Requires lib present at runtime.',
+      code:`<span class="cm"># create</span>
+g++ -shared -fPIC foo.cpp -o libfoo.so
+
+<span class="cm"># link</span>
+g++ main.cpp -L. -lfoo -o app
+export LD_LIBRARY_PATH=.
+
+<span class="cm"># runtime load</span>
+<span class="kw">void</span>* h = <span class="fn">dlopen</span>(<span class="st">"libfoo.so"</span>, RTLD_LAZY);` },
+    { name:'header-only library', desc:'All code in headers — no separate compilation step. Common in modern C++ (Catch2, nlohmann/json, etc.).',
+      code:`<span class="cm">// just include and use — no linking needed</span>
+<span class="cm">#include "nlohmann/json.hpp"</span>
+
+<span class="cm">// one TU defines the implementation:</span>
+<span class="cm">#define MY_LIB_IMPL</span>
+<span class="cm">#include "mylib.h"</span>` },
+    { name:'include paths & linker flags',
+      code:`<span class="cm"># compile flags</span>
+-I/path/to/headers      <span class="cm"># header search</span>
+-isystem/vendor/include <span class="cm"># suppress warnings</span>
+
+<span class="cm"># linker flags</span>
+-L/path/to/libs         <span class="cm"># library search</span>
+-lfoo                   <span class="cm"># link libfoo</span>
+-Wl,-rpath,/opt/libs    <span class="cm"># embed runtime path</span>`, tip:'Use CMake target_link_libraries / target_include_directories to manage this automatically.' },
+    { name:'link order matters', desc:'Static linker resolves symbols left-to-right. Dependents must come before dependencies.',
+      code:`<span class="cm"># correct: app depends on foo, foo on bar</span>
+g++ app.o -lfoo -lbar
+
+<span class="cm"># if circular: wrap with --start-group</span>
+g++ app.o -Wl,--start-group -lfoo -lbar -Wl,--end-group` },
+  ]},
+
+  // ── STANDARD LIBRARY ─────────────────────────────────
+  { id:'stdlib-containers', cat:'stdlib', title:'containers', concepts:[
+    { name:'sequence containers',
+      code:`<span class="cm">// vector — contiguous, O(1) random access, amortised O(1) push_back</span>
+std::<span class="ty">vector</span>&lt;<span class="kw">int</span>&gt; v = {<span class="li">1</span>,<span class="li">2</span>,<span class="li">3</span>};
+v.<span class="fn">reserve</span>(<span class="li">64</span>);   <span class="cm">// pre-allocate, avoids realloc</span>
+
+<span class="cm">// array — fixed size, stack-allocated</span>
+std::<span class="ty">array</span>&lt;<span class="kw">int</span>,<span class="li">4</span>&gt; a = {<span class="li">1</span>,<span class="li">2</span>,<span class="li">3</span>,<span class="li">4</span>};
+
+<span class="cm">// deque — O(1) push front AND back</span>
+<span class="cm">// list   — O(1) insert anywhere, no random access</span>
+<span class="cm">// forward_list — singly-linked, lowest overhead</span>` },
+    { name:'associative containers',
+      code:`<span class="cm">// ordered (red-black tree) — O(log n)</span>
+std::<span class="ty">map</span>&lt;<span class="ty">std::string</span>,<span class="kw">int</span>&gt; m;
+std::<span class="ty">set</span>&lt;<span class="kw">int</span>&gt; s;
+
+<span class="cm">// unordered (hash table) — O(1) avg</span>
+std::<span class="ty">unordered_map</span>&lt;<span class="ty">std::string</span>,<span class="kw">int</span>&gt; um;
+std::<span class="ty">unordered_set</span>&lt;<span class="kw">int</span>&gt; us;
+
+<span class="cm">// multi- variants allow duplicate keys</span>` },
+    { name:'container adapters',
+      code:`std::<span class="ty">stack</span>&lt;<span class="kw">int</span>&gt; stk;   <span class="cm">// LIFO — wraps deque</span>
+stk.<span class="fn">push</span>(<span class="li">1</span>); stk.<span class="fn">pop</span>();
+
+std::<span class="ty">queue</span>&lt;<span class="kw">int</span>&gt; q;    <span class="cm">// FIFO</span>
+std::<span class="ty">priority_queue</span>&lt;<span class="kw">int</span>&gt; pq; <span class="cm">// max-heap by default</span>` },
+    { name:'choosing a container',
+      code:`<span class="cm">// Need random access?        → vector / array</span>
+<span class="cm">// Fast insert at front/back? → deque</span>
+<span class="cm">// Fast insert anywhere?      → list</span>
+<span class="cm">// Key→value, ordered?        → map</span>
+<span class="cm">// Key→value, fast lookup?    → unordered_map</span>
+<span class="cm">// Unique sorted values?      → set</span>
+<span class="cm">// Default choice:            → vector</span>`, tip:'unordered_map is ~3–5x faster than map for large datasets but has worse worst-case.' },
+  ]},
+
+  { id:'stdlib-iterators', cat:'stdlib', title:'iterators', concepts:[
+    { name:'iterator categories',
+      code:`<span class="cm">// Input      — read once, forward only (istream)</span>
+<span class="cm">// Forward     — re-read, forward only (forward_list)</span>
+<span class="cm">// Bidirectional — forward + backward (list, map)</span>
+<span class="cm">// RandomAccess  — +n, -n, [] (vector, deque)</span>
+<span class="cm">// Contiguous    — RandomAccess + contiguous mem (vector, array)</span>` },
+    { name:'basic usage',
+      code:`std::<span class="ty">vector</span>&lt;<span class="kw">int</span>&gt; v = {<span class="li">1</span>,<span class="li">2</span>,<span class="li">3</span>};
+
+<span class="kw">for</span> (<span class="kw">auto</span> it = v.<span class="fn">begin</span>(); it != v.<span class="fn">end</span>(); ++it)
+  std::cout &lt;&lt; *it;
+
+<span class="cm">// range-based for (preferred)</span>
+<span class="kw">for</span> (<span class="kw">const auto</span>&amp; x : v) std::cout &lt;&lt; x;` },
+    { name:'iterator utilities',
+      code:`std::<span class="fn">advance</span>(it, <span class="li">3</span>);          <span class="cm">// move n steps</span>
+<span class="kw">auto</span> d = std::<span class="fn">distance</span>(a, b);  <span class="cm">// steps between</span>
+<span class="kw">auto</span> n = std::<span class="fn">next</span>(it, <span class="li">2</span>);     <span class="cm">// copy + advance</span>
+<span class="kw">auto</span> p = std::<span class="fn">prev</span>(it);        <span class="cm">// copy - 1</span>` },
+    { name:'reverse & insert iterators',
+      code:`<span class="kw">for</span> (<span class="kw">auto</span> it = v.<span class="fn">rbegin</span>(); it != v.<span class="fn">rend</span>(); ++it) {}
+
+std::<span class="fn">copy</span>(src.<span class="fn">begin</span>(), src.<span class="fn">end</span>(),
+  std::<span class="fn">back_inserter</span>(dest));  <span class="cm">// push_back inserter</span>` },
+    { name:'custom iterator (C++20 simplified)',
+      code:`<span class="kw">struct</span> <span class="ty">Range</span> {
+  <span class="kw">int</span> lo, hi;
+  <span class="kw">struct</span> <span class="ty">Iter</span> {
+    <span class="kw">int</span> v;
+    <span class="kw">int</span> <span class="kw">operator</span>*() <span class="kw">const</span> { <span class="kw">return</span> v; }
+    <span class="ty">Iter</span>&amp; <span class="kw">operator</span>++() { ++v; <span class="kw">return</span> *<span class="kw">this</span>; }
+    <span class="kw">bool</span> <span class="kw">operator</span>!=(<span class="ty">Iter</span> o) <span class="kw">const</span> { <span class="kw">return</span> v != o.v; }
+  };
+  <span class="ty">Iter</span> <span class="fn">begin</span>() { <span class="kw">return</span> {lo}; }
+  <span class="ty">Iter</span> <span class="fn">end</span>()   { <span class="kw">return</span> {hi}; }
+};` },
+  ]},
+
+  { id:'stdlib-algorithms', cat:'stdlib', title:'algorithms', concepts:[
+    { name:'sorting & searching',
+      code:`std::<span class="fn">sort</span>(v.<span class="fn">begin</span>(), v.<span class="fn">end</span>());
+std::<span class="fn">sort</span>(v.<span class="fn">begin</span>(), v.<span class="fn">end</span>(), std::greater&lt;<span class="kw">int</span>&gt;{});
+std::<span class="fn">stable_sort</span>(v.<span class="fn">begin</span>(), v.<span class="fn">end</span>());
+
+<span class="kw">auto</span> it = std::<span class="fn">find</span>(v.<span class="fn">begin</span>(), v.<span class="fn">end</span>(), <span class="li">42</span>);
+<span class="kw">bool</span> found = std::<span class="fn">binary_search</span>(v.<span class="fn">begin</span>(), v.<span class="fn">end</span>(), <span class="li">42</span>);
+<span class="kw">auto</span> [lo,hi] = std::<span class="fn">equal_range</span>(v.<span class="fn">begin</span>(), v.<span class="fn">end</span>(), <span class="li">5</span>);` },
+    { name:'transforms & reductions',
+      code:`std::<span class="fn">transform</span>(v.<span class="fn">begin</span>(), v.<span class="fn">end</span>(), out.<span class="fn">begin</span>(),
+  [](<span class="kw">int</span> x){ <span class="kw">return</span> x*x; });
+
+<span class="kw">int</span> sum = std::<span class="fn">accumulate</span>(v.<span class="fn">begin</span>(), v.<span class="fn">end</span>(), <span class="li">0</span>);
+<span class="kw">int</span> prod = std::<span class="fn">reduce</span>(v.<span class="fn">begin</span>(), v.<span class="fn">end</span>(), <span class="li">1</span>, std::multiplies{});` },
+    { name:'copy, fill, remove',
+      code:`std::<span class="fn">copy_if</span>(src.<span class="fn">begin</span>(), src.<span class="fn">end</span>(), <span class="fn">back_inserter</span>(dst),
+  [](<span class="kw">int</span> x){ <span class="kw">return</span> x &gt; <span class="li">0</span>; });
+
+std::<span class="fn">fill</span>(v.<span class="fn">begin</span>(), v.<span class="fn">end</span>(), <span class="li">0</span>);
+
+<span class="cm">// erase-remove idiom</span>
+v.<span class="fn">erase</span>(std::<span class="fn">remove_if</span>(v.<span class="fn">begin</span>(), v.<span class="fn">end</span>(),
+  [](<span class="kw">int</span> x){ <span class="kw">return</span> x &lt; <span class="li">0</span>; }), v.<span class="fn">end</span>());` },
+    { name:'parallel execution (C++17)',
+      code:`<span class="cm">#include &lt;execution&gt;</span>
+std::<span class="fn">sort</span>(std::<span class="ty">execution::par_unseq</span>,
+  v.<span class="fn">begin</span>(), v.<span class="fn">end</span>());    <span class="cm">// parallel + vectorised</span>
+<span class="cm">// policies: seq, par, par_unseq, unseq(C++20)</span>`, tip:'std::ranges versions (C++20) take the container directly: std::ranges::sort(v);' },
+  ]},
+
+  { id:'stdlib-ranges', cat:'stdlib', title:'ranges & views (C++20)', concepts:[
+    { name:'ranges algorithms', desc:'Take the whole container — no begin/end boilerplate.',
+      code:`<span class="cm">#include &lt;ranges&gt;</span>
+std::ranges::<span class="fn">sort</span>(v);
+std::ranges::<span class="fn">reverse</span>(v);
+<span class="kw">auto</span> it = std::ranges::<span class="fn">find</span>(v, <span class="li">42</span>);` },
+    { name:'lazy view pipeline',
+      code:`<span class="kw">namespace</span> <span class="ty">rv</span> = std::ranges::views;
+
+<span class="kw">auto</span> result = v
+  | rv::<span class="fn">filter</span>([](<span class="kw">int</span> x){ <span class="kw">return</span> x % <span class="li">2</span> == <span class="li">0</span>; })
+  | rv::<span class="fn">transform</span>([](<span class="kw">int</span> x){ <span class="kw">return</span> x * x; })
+  | rv::<span class="fn">take</span>(<span class="li">5</span>);
+<span class="cm">// nothing computed yet — fully lazy</span>
+<span class="kw">for</span> (<span class="kw">int</span> x : result) std::cout &lt;&lt; x;` },
+    { name:'common views',
+      code:`rv::<span class="fn">iota</span>(<span class="li">0</span>, <span class="li">10</span>)         <span class="cm">// 0,1,2,...,9</span>
+rv::<span class="fn">enumerate</span>(v)        <span class="cm">// (index, value) pairs C++23</span>
+rv::<span class="fn">zip</span>(v1, v2)         <span class="cm">// (v1[i], v2[i])  C++23</span>
+rv::<span class="fn">split</span>(str, <span class="st">' '</span>)     <span class="cm">// split on delimiter</span>
+rv::<span class="fn">reverse</span>(v)          <span class="cm">// reversed view</span>
+rv::<span class="fn">keys</span>(map)           <span class="cm">// keys of map/pair range</span>
+rv::<span class="fn">values</span>(map)         <span class="cm">// values of map/pair range</span>` },
+    { name:'owning ranges — std::ranges::to (C++23)',
+      code:`<span class="kw">auto</span> vec = rv::<span class="fn">iota</span>(<span class="li">1</span>,<span class="li">6</span>)
+  | rv::<span class="fn">transform</span>([](<span class="kw">int</span> x){ <span class="kw">return</span> x*x; })
+  | std::ranges::<span class="fn">to</span>&lt;std::<span class="ty">vector</span>&gt;();
+<span class="cm">// vec = {1,4,9,16,25}</span>`, tip:'Views are non-owning and O(1) to copy. Use ranges::to to materialise into a container.' },
+  ]},
+
+  { id:'stdlib-strings', cat:'stdlib', title:'strings & text', concepts:[
+    { name:'std::string basics',
+      code:`std::<span class="ty">string</span> s = <span class="st">"hello"</span>;
+s += <span class="st">" world"</span>;
+s.<span class="fn">size</span>();  s.<span class="fn">empty</span>();  s.<span class="fn">find</span>(<span class="st">"lo"</span>);
+s.<span class="fn">substr</span>(<span class="li">0</span>, <span class="li">3</span>);   <span class="cm">// "hel"</span>
+s.<span class="fn">replace</span>(<span class="li">0</span>, <span class="li">2</span>, <span class="st">"HE"</span>);
+std::<span class="fn">stoi</span>(s);  std::<span class="fn">to_string</span>(<span class="li">42</span>);` },
+    { name:'string_view (C++17)', desc:'Non-owning reference to a string. Zero-copy parameter passing.',
+      code:`<span class="kw">void</span> <span class="fn">print</span>(std::<span class="ty">string_view</span> sv) {  <span class="cm">// no copy</span>
+  sv.<span class="fn">substr</span>(<span class="li">0</span>, <span class="li">3</span>);  <span class="cm">// also non-owning</span>
+}
+<span class="fn">print</span>(<span class="st">"literal"</span>);    <span class="cm">// fine</span>
+<span class="fn">print</span>(my_string);   <span class="cm">// fine</span>`, tip:'Never return string_view pointing to a local string — dangling view.' },
+    { name:'std::format (C++20)',
+      code:`<span class="cm">#include &lt;format&gt;</span>
+<span class="ty">std::string</span> s = std::<span class="fn">format</span>(<span class="st">"Hello {}! Pi={:.2f}"</span>,
+  <span class="st">"world"</span>, <span class="li">3.14159</span>);
+<span class="cm">// s = "Hello world! Pi=3.14"</span>
+
+std::<span class="fn">print</span>(<span class="st">"x={}\n"</span>, x);  <span class="cm">// C++23 direct print</span>` },
+    { name:'string manipulation',
+      code:`<span class="cm">// split (no stdlib split pre-C++20)</span>
+std::<span class="ty">istringstream</span> iss(s);
+<span class="ty">std::string</span> tok;
+<span class="kw">while</span> (std::<span class="fn">getline</span>(iss, tok, <span class="st">','</span>)) tokens.<span class="fn">push_back</span>(tok);
+
+<span class="cm">// trim (manual in C++, or use ranges)</span>
+<span class="kw">auto</span> trimmed = s | rv::<span class="fn">drop_while</span>(::isspace);` },
+  ]},
+
+  { id:'stdlib-coroutines', cat:'stdlib', title:'coroutines (C++20)', concepts:[
+    { name:'what is a coroutine', desc:'A function that can suspend and resume. The compiler transforms it into a state machine on the heap.',
+      code:`<span class="cm">// keywords</span>
+<span class="kw">co_return</span> value;   <span class="cm">// return from coroutine</span>
+<span class="kw">co_yield</span>  value;   <span class="cm">// suspend + produce value</span>
+<span class="kw">co_await</span>  expr;    <span class="cm">// suspend until expr ready</span>`, tip:'C++20 gives the low-level machinery. Use a library (cppcoro, libcoro, std::generator C++23) for practical generators/tasks.' },
+    { name:'generator with std::generator (C++23)',
+      code:`std::<span class="ty">generator</span>&lt;<span class="kw">int</span>&gt; <span class="fn">fibonacci</span>() {
+  <span class="kw">int</span> a = <span class="li">0</span>, b = <span class="li">1</span>;
+  <span class="kw">while</span> (<span class="kw">true</span>) {
+    <span class="kw">co_yield</span> a;
+    <span class="kw">auto</span> c = a + b; a = b; b = c;
+  }
+}
+<span class="kw">for</span> (<span class="kw">int</span> n : <span class="fn">fibonacci</span>() | rv::<span class="fn">take</span>(<span class="li">8</span>))
+  std::cout &lt;&lt; n;` },
+    { name:'co_await (async task pattern)',
+      code:`<span class="ty">Task</span>&lt;<span class="kw">int</span>&gt; <span class="fn">fetchData</span>() {
+  <span class="kw">auto</span> result = <span class="kw">co_await</span> <span class="fn">asyncRead</span>();
+  <span class="kw">co_return</span> result * <span class="li">2</span>;
+}
+<span class="cm">// suspension point: coroutine pauses,</span>
+<span class="cm">// thread is freed for other work</span>` },
+  ]},
+
+  // ── IDIOMS & PATTERNS ────────────────────────────────
+  { id:'idioms-typededuction', cat:'idioms', title:'type deduction', concepts:[
+    { name:'auto', desc:'Deduces type from initialiser. Strips refs and const by default.',
+      code:`<span class="kw">auto</span> x = <span class="li">42</span>;           <span class="cm">// int</span>
+<span class="kw">auto</span> d = <span class="li">3.14</span>;          <span class="cm">// double</span>
+<span class="kw">auto</span>&amp; r = x;             <span class="cm">// int& — keeps ref</span>
+<span class="kw">const auto</span>&amp; cr = x;     <span class="cm">// const int&</span>
+<span class="kw">auto</span>&amp;&amp; fwd = expr;       <span class="cm">// forwarding ref</span>` },
+    { name:'decltype', desc:'Deduces type of an expression without evaluating it.',
+      code:`<span class="kw">int</span> x = <span class="li">5</span>;
+<span class="kw">decltype</span>(x)   y = x;   <span class="cm">// int</span>
+<span class="kw">decltype</span>(x&amp;)  r = x;   <span class="cm">// int&</span>
+<span class="kw">decltype</span>(<span class="fn">f</span>()) z = <span class="fn">f</span>(); <span class="cm">// return type of f()</span>` },
+    { name:'decltype(auto)', desc:'Preserves refs and const — unlike plain auto.',
+      code:`<span class="kw">decltype</span>(<span class="kw">auto</span>) <span class="fn">getRef</span>() {
+  <span class="kw">static int</span> x;
+  <span class="kw">return</span> (x);   <span class="cm">// returns int& not int</span>
+}` },
+    { name:'CTAD — class template argument deduction (C++17)',
+      code:`std::<span class="ty">pair</span> p{<span class="li">1</span>, <span class="li">3.14</span>};      <span class="cm">// pair&lt;int,double&gt;</span>
+std::<span class="ty">vector</span> v{<span class="li">1</span>,<span class="li">2</span>,<span class="li">3</span>};     <span class="cm">// vector&lt;int&gt;</span>
+std::<span class="ty">lock_guard</span> lk(mtx);   <span class="cm">// lock_guard&lt;mutex&gt;</span>` },
+    { name:'template argument deduction rules',
+      code:`<span class="kw">template</span>&lt;<span class="kw">typename</span> <span class="ty">T</span>&gt; <span class="kw">void</span> <span class="fn">f</span>(<span class="ty">T</span>  x); <span class="cm">// T = decayed type</span>
+<span class="kw">template</span>&lt;<span class="kw">typename</span> <span class="ty">T</span>&gt; <span class="kw">void</span> <span class="fn">g</span>(<span class="ty">T</span>&amp; x); <span class="cm">// T preserves const</span>
+<span class="kw">template</span>&lt;<span class="kw">typename</span> <span class="ty">T</span>&gt; <span class="kw">void</span> <span class="fn">h</span>(<span class="ty">T</span>&amp;&amp;x); <span class="cm">// forwarding ref</span>`, tip:'When in doubt, use auto and let the compiler tell you the deduced type with a static_assert or IDE hover.' },
+  ]},
+
+  { id:'idioms-structbind', cat:'idioms', title:'structured bindings (C++17)', concepts:[
+    { name:'basic syntax', desc:'Decompose tuples, pairs, structs, and arrays in one declaration.',
+      code:`<span class="kw">auto</span> [a, b] = std::<span class="fn">make_pair</span>(<span class="li">1</span>, <span class="li">3.14</span>);
+<span class="kw">auto</span> [x, y, z] = std::<span class="ty">array</span>&lt;<span class="kw">int</span>,<span class="li">3</span>&gt;{<span class="li">1</span>,<span class="li">2</span>,<span class="li">3</span>};
+
+<span class="kw">struct</span> <span class="ty">Point</span> { <span class="kw">int</span> x, y; };
+<span class="ty">Point</span> p{<span class="li">3</span>,<span class="li">4</span>};
+<span class="kw">auto</span> [px, py] = p;` },
+    { name:'map iteration',
+      code:`std::<span class="ty">map</span>&lt;<span class="ty">std::string</span>,<span class="kw">int</span>&gt; scores;
+<span class="kw">for</span> (<span class="kw">const auto</span>&amp; [name, score] : scores) {
+  std::cout &lt;&lt; name &lt;&lt; <span class="st">": "</span> &lt;&lt; score &lt;&lt; <span class="st">"\n"</span>;
+}` },
+    { name:'with references & const',
+      code:`<span class="kw">auto</span>&amp; [x, y] = point;        <span class="cm">// modify original</span>
+<span class="kw">const auto</span>&amp; [x, y] = point;  <span class="cm">// read-only</span>
+<span class="kw">auto</span>&amp;&amp; [x, y] = getPoint();  <span class="cm">// forwarding</span>` },
+    { name:'ignore fields', desc:'No std::ignore for structured bindings — use [[maybe_unused]] or a named placeholder.',
+      code:`<span class="kw">auto</span> [_, second] = pair;   <span class="cm">// _ is valid identifier</span>
+[[maybe_unused]] <span class="kw">auto</span> [a, b, c] = triple;` },
+  ]},
+
+  { id:'idioms-opoverload', cat:'idioms', title:'operator overloading', concepts:[
+    { name:'arithmetic & comparison',
+      code:`<span class="kw">struct</span> <span class="ty">Vec2</span> {
+  <span class="kw">float</span> x, y;
+  <span class="ty">Vec2</span> <span class="kw">operator</span>+(<span class="ty">Vec2</span> o) <span class="kw">const</span> { <span class="kw">return</span> {x+o.x, y+o.y}; }
+  <span class="ty">Vec2</span>&amp; <span class="kw">operator</span>+=(<span class="ty">Vec2</span> o) { x+=o.x; y+=o.y; <span class="kw">return</span> *<span class="kw">this</span>; }
+  <span class="kw">bool</span> <span class="kw">operator</span>==(<span class="ty">Vec2</span> o) <span class="kw">const</span> = <span class="kw">default</span>; <span class="cm">// C++20</span>
+};` },
+    { name:'spaceship operator (C++20)', desc:'<=> auto-generates all six comparison operators.',
+      code:`<span class="kw">struct</span> <span class="ty">Version</span> {
+  <span class="kw">int</span> major, minor;
+  <span class="kw">auto</span> <span class="kw">operator</span>&lt;=&gt;(<span class="kw">const</span> <span class="ty">Version</span>&amp;) <span class="kw">const</span> = <span class="kw">default</span>;
+};
+<span class="cm">// now supports: == != < <= > >=</span>` },
+    { name:'stream operators',
+      code:`<span class="kw">friend</span> std::<span class="ty">ostream</span>&amp; <span class="kw">operator</span>&lt;&lt;(
+  std::<span class="ty">ostream</span>&amp; os, <span class="kw">const</span> <span class="ty">Vec2</span>&amp; v) {
+  <span class="kw">return</span> os &lt;&lt; <span class="st">"("</span> &lt;&lt; v.x &lt;&lt; <span class="st">","</span> &lt;&lt; v.y &lt;&lt; <span class="st">")"</span>;
+}` },
+    { name:'subscript, call, dereference',
+      code:`<span class="ty">T</span>&amp; <span class="kw">operator</span>[](<span class="ty">std::size_t</span> i);       <span class="cm">// subscript</span>
+<span class="kw">int</span> <span class="kw">operator</span>()(<span class="kw">int</span> a, <span class="kw">int</span> b) <span class="kw">const</span>;  <span class="cm">// functor call</span>
+<span class="ty">T</span>&amp; <span class="kw">operator</span>*() <span class="kw">const</span>;               <span class="cm">// dereference</span>
+<span class="ty">T</span>* <span class="kw">operator</span>-&gt;() <span class="kw">const</span>;              <span class="cm">// member access</span>`, tip:'Prefer =default for == and <=> where possible. Implement + as a free function calling += for consistency.' },
+  ]},
+
+  { id:'idioms-inherit', cat:'idioms', title:'inheritance deep-dive', concepts:[
+    { name:'access specifiers in inheritance',
+      code:`<span class="kw">struct</span> <span class="ty">D</span> : <span class="kw">public</span>    <span class="ty">B</span> {}; <span class="cm">// public  → same access</span>
+<span class="kw">struct</span> <span class="ty">D</span> : <span class="kw">protected</span> <span class="ty">B</span> {}; <span class="cm">// public  → protected</span>
+<span class="kw">struct</span> <span class="ty">D</span> : <span class="kw">private</span>   <span class="ty">B</span> {}; <span class="cm">// all     → private</span>
+<span class="cm">// struct inherits public by default; class private</span>` },
+    { name:'multiple inheritance',
+      code:`<span class="kw">struct</span> <span class="ty">Flyable</span>  { <span class="kw">virtual void</span> <span class="fn">fly</span>() = <span class="li">0</span>; };
+<span class="kw">struct</span> <span class="ty">Swimmable</span>{ <span class="kw">virtual void</span> <span class="fn">swim</span>() = <span class="li">0</span>; };
+<span class="kw">struct</span> <span class="ty">Duck</span> : <span class="ty">Flyable</span>, <span class="ty">Swimmable</span> {
+  <span class="kw">void</span> <span class="fn">fly</span>() <span class="kw">override</span> {}
+  <span class="kw">void</span> <span class="fn">swim</span>() <span class="kw">override</span> {}
+};`, tip:'OK for interfaces (pure abstract, no data). Avoid data in multiple bases.' },
+    { name:'diamond problem & virtual inheritance',
+      code:`<span class="kw">struct</span> <span class="ty">A</span> { <span class="kw">int</span> x; };
+<span class="kw">struct</span> <span class="ty">B</span> : <span class="kw">virtual</span> <span class="ty">A</span> {};
+<span class="kw">struct</span> <span class="ty">C</span> : <span class="kw">virtual</span> <span class="ty">A</span> {};
+<span class="kw">struct</span> <span class="ty">D</span> : <span class="ty">B</span>, <span class="ty">C</span> {};  <span class="cm">// only one A::x</span>` },
+    { name:'object slicing',
+      code:`<span class="kw">void</span> <span class="fn">bad</span>(<span class="ty">Base</span> b)  { b.<span class="fn">speak</span>(); } <span class="cm">// sliced! copy</span>
+<span class="kw">void</span> <span class="fn">good</span>(<span class="ty">Base</span>&amp; b) { b.<span class="fn">speak</span>(); } <span class="cm">// polymorphic</span>`, tip:'Always pass polymorphic objects by reference or pointer, never by value.' },
+  ]},
+
+  { id:'idioms-crtp', cat:'idioms', title:'CRTP & policy-based design', concepts:[
+    { name:'CRTP — Curiously Recurring Template Pattern', desc:'Static (compile-time) polymorphism. Zero virtual call overhead.',
+      code:`<span class="kw">template</span>&lt;<span class="kw">typename</span> <span class="ty">Derived</span>&gt;
+<span class="kw">struct</span> <span class="ty">Base</span> {
+  <span class="kw">void</span> <span class="fn">interface</span>() {
+    <span class="kw">static_cast</span>&lt;<span class="ty">Derived</span>*&gt;(<span class="kw">this</span>)-&gt;<span class="fn">impl</span>();
+  }
+};
+<span class="kw">struct</span> <span class="ty">Dog</span> : <span class="ty">Base</span>&lt;<span class="ty">Dog</span>&gt; {
+  <span class="kw">void</span> <span class="fn">impl</span>() { <span class="cm">/* woof */</span> }
+};`, tip:'CRTP avoids vtable overhead and enables compile-time polymorphism, but adds template complexity.' },
+    { name:'CRTP for mixin functionality', desc:'Add capabilities to derived classes without virtual.',
+      code:`<span class="kw">template</span>&lt;<span class="kw">typename</span> <span class="ty">T</span>&gt;
+<span class="kw">struct</span> <span class="ty">Comparable</span> {
+  <span class="kw">bool</span> <span class="kw">operator</span>&lt;=(<span class="kw">const</span> <span class="ty">T</span>&amp; o) <span class="kw">const</span> {
+    <span class="kw">return</span> !(<span class="kw">static_cast</span>&lt;<span class="kw">const</span> <span class="ty">T</span>&amp;&gt;(*<span class="kw">this</span>) &gt; o);
+  }
+};
+<span class="kw">struct</span> <span class="ty">Num</span> : <span class="ty">Comparable</span>&lt;<span class="ty">Num</span>&gt; { <span class="kw">int</span> v; };` },
+    { name:'policy-based design', desc:'Swap behaviours at compile-time via template parameters.',
+      code:`<span class="kw">template</span>&lt;<span class="kw">typename</span> <span class="ty">StoragePolicy</span>,
+         <span class="kw">typename</span> <span class="ty">LogPolicy</span> = <span class="ty">NoLog</span>&gt;
+<span class="kw">class</span> <span class="ty">Buffer</span> : <span class="ty">StoragePolicy</span>, <span class="ty">LogPolicy</span> {
+  <span class="kw">void</span> <span class="fn">write</span>(<span class="ty">std::span</span>&lt;<span class="kw">const</span> <span class="ty">std::byte</span>&gt; d) {
+    <span class="ty">LogPolicy</span>::<span class="fn">log</span>(<span class="st">"write"</span>);
+    <span class="ty">StoragePolicy</span>::<span class="fn">store</span>(d);
+  }
+};` },
+  ]},
+
+  { id:'idioms-typerasure', cat:'idioms', title:'type erasure', concepts:[
+    { name:'what & why', desc:'Hide a concrete type behind a uniform interface without virtual inheritance. Used by std::function, std::any, std::variant.',
+      code:`<span class="cm">// Problem: store callables of different types</span>
+<span class="cm">// Solution: erase the type, keep the interface</span>
+std::<span class="ty">function</span>&lt;<span class="kw">void</span>()&gt; f;
+f = []{ <span class="cm">/* lambda */</span> };
+f = &amp;<span class="fn">freeFunction</span>;
+f = myFunctor;` },
+    { name:'std::any (C++17)', desc:'Holds any copy-constructible type. Use sparingly — prefer variants.',
+      code:`std::<span class="ty">any</span> a = <span class="li">42</span>;
+a = std::<span class="ty">string</span>(<span class="st">"hello"</span>);
+<span class="kw">auto</span> s = std::<span class="fn">any_cast</span>&lt;std::<span class="ty">string</span>&gt;(a);
+<span class="cm">// throws std::bad_any_cast on wrong type</span>` },
+    { name:'manual type erasure pattern',
+      code:`<span class="kw">struct</span> <span class="ty">IDrawable</span> {
+  <span class="kw">virtual void</span> <span class="fn">draw</span>() = <span class="li">0</span>;
+  <span class="kw">virtual</span> ~<span class="ty">IDrawable</span>() = <span class="kw">default</span>;
+};
+<span class="kw">template</span>&lt;<span class="kw">typename</span> <span class="ty">T</span>&gt;
+<span class="kw">struct</span> <span class="ty">DrawableModel</span> : <span class="ty">IDrawable</span> {
+  <span class="ty">T</span> obj;
+  <span class="kw">void</span> <span class="fn">draw</span>() <span class="kw">override</span> { obj.<span class="fn">draw</span>(); }
+};` },
+  ]},
+
+  { id:'idioms-pimpl', cat:'idioms', title:'pimpl idiom', concepts:[
+    { name:'pointer to implementation', desc:'Hide implementation details and dependencies. Reduces compile times and provides ABI stability.',
+      code:`<span class="cm">// widget.h — clean public header</span>
+<span class="kw">class</span> <span class="ty">Widget</span> {
+<span class="kw">public</span>:
+  <span class="ty">Widget</span>();
+  ~<span class="ty">Widget</span>();
+  <span class="kw">void</span> <span class="fn">render</span>();
+<span class="kw">private</span>:
+  <span class="kw">struct</span> <span class="ty">Impl</span>;
+  std::<span class="ty">unique_ptr</span>&lt;<span class="ty">Impl</span>&gt; pImpl;
+};` },
+    { name:'implementation file',
+      code:`<span class="cm">// widget.cpp — all heavy includes here</span>
+<span class="cm">#include "widget.h"</span>
+<span class="cm">#include "heavy_dep.h"</span>
+
+<span class="kw">struct</span> <span class="ty">Widget::Impl</span> {
+  <span class="ty">HeavyDep</span> dep;
+  <span class="kw">void</span> <span class="fn">render</span>() { dep.<span class="fn">draw</span>(); }
+};
+<span class="ty">Widget</span>::<span class="ty">Widget</span>() : pImpl(std::<span class="fn">make_unique</span>&lt;<span class="ty">Impl</span>&gt;()) {}
+<span class="ty">Widget</span>::~<span class="ty">Widget</span>() = <span class="kw">default</span>; <span class="cm">// must be in .cpp!</span>
+<span class="kw">void</span> <span class="ty">Widget</span>::<span class="fn">render</span>() { pImpl-&gt;<span class="fn">render</span>(); }`, tip:'Define the destructor in the .cpp where Impl is complete — otherwise unique_ptr delete fails to compile.' },
+  ]},
+
+  { id:'idioms-ub', cat:'idioms', title:'undefined behaviour', concepts:[
+    { name:'common UB traps',
+      code:`<span class="cm">// signed integer overflow</span>
+<span class="kw">int</span> x = INT_MAX + <span class="li">1</span>;         <span class="cm">// UB!</span>
+<span class="kw">unsigned int</span> u = UINT_MAX+<span class="li">1</span>; <span class="cm">// ok, wraps</span>
+
+<span class="cm">// null / dangling pointer deref</span>
+<span class="kw">int</span>* p = <span class="kw">nullptr</span>; *p = <span class="li">5</span>;   <span class="cm">// UB!</span>
+
+<span class="cm">// use after free</span>
+<span class="kw">delete</span> p; *p = <span class="li">1</span>;            <span class="cm">// UB!</span>
+
+<span class="cm">// out-of-bounds access</span>
+<span class="kw">int</span> arr[<span class="li">5</span>]; arr[<span class="li">10</span>] = <span class="li">0</span>;    <span class="cm">// UB!</span>` },
+    { name:'strict aliasing',
+      desc:'Accessing an object through a pointer of a different type is UB (except char/byte).',
+      code:`<span class="kw">float</span> f = <span class="li">1.0f</span>;
+<span class="kw">int</span>* p = <span class="kw">reinterpret_cast</span>&lt;<span class="kw">int</span>*&gt;(&amp;f); <span class="cm">// UB!</span>
+
+<span class="cm">// correct: use memcpy or std::bit_cast (C++20)</span>
+<span class="kw">int</span> bits = std::<span class="fn">bit_cast</span>&lt;<span class="kw">int</span>&gt;(f);    <span class="cm">// ok</span>`, tip:'-fno-strict-aliasing disables the optimisation but not the UB. Use bit_cast instead.' },
+    { name:'unsequenced side effects',
+      code:`<span class="kw">int</span> i = <span class="li">0</span>;
+i = i++;        <span class="cm">// UB! (pre-C++17)</span>
+f(i++, i++);    <span class="cm">// UB! order unspecified</span>
+
+<span class="cm">// use sequence points</span>
+i++; i++;       <span class="cm">// fine</span>` },
+    { name:'how to catch UB',
+      code:`<span class="cm"># compile with sanitizers</span>
+g++ -fsanitize=undefined,address -g
+<span class="cm"># UBSan catches: overflow, null, OOB, misalign</span>
+<span class="cm"># ASan catches:  heap OOB, use-after-free, leaks</span>` },
+  ]},
+
+  { id:'idioms-preprocessor', cat:'idioms', title:'preprocessor', concepts:[
+    { name:'include guards vs #pragma once',
+      code:`<span class="cm">// classic include guard</span>
+<span class="cm">#ifndef MY_HEADER_H</span>
+<span class="cm">#define MY_HEADER_H</span>
+<span class="cm">// ... content ...</span>
+<span class="cm">#endif</span>
+
+<span class="cm">// pragma once — simpler, widely supported</span>
+<span class="cm">#pragma once</span>
+<span class="cm">// ... content ...</span>`, tip:'#pragma once is not ISO but supported by every major compiler. Prefer it for simplicity.' },
+    { name:'macros',
+      code:`<span class="cm">#define PI 3.14159f        // constant (prefer constexpr)</span>
+<span class="cm">#define MAX(a,b) ((a)>(b)?(a):(b))  // function (prefer template)</span>
+<span class="cm">#define STRINGIFY(x) #x    // stringification</span>
+<span class="cm">#define CONCAT(a,b) a##b   // token paste</span>
+<span class="cm">#undef PI                   // undefine</span>` },
+    { name:'conditional compilation',
+      code:`<span class="cm">#ifdef _WIN32</span>
+<span class="cm">  // Windows-specific code</span>
+<span class="cm">#elif defined(__linux__)</span>
+<span class="cm">  // Linux-specific code</span>
+<span class="cm">#else</span>
+<span class="cm">  // fallback</span>
+<span class="cm">#endif</span>
+
+<span class="cm">#if __cplusplus >= 202002L  // C++20+</span>` },
+    { name:'useful predefined macros',
+      code:`__FILE__    <span class="cm">// current filename</span>
+__LINE__    <span class="cm">// current line number</span>
+__func__    <span class="cm">// current function name</span>
+__DATE__    <span class="cm">// compilation date</span>
+__cplusplus <span class="cm">// 201103L / 201402L / 201703L / 202002L</span>
+NDEBUG      <span class="cm">// defined by -DNDEBUG; disables assert()</span>` },
+  ]},
+
+  { id:'idioms-modules', cat:'idioms', title:'modules (C++20)', concepts:[
+    { name:'why modules', desc:'Replace #include with import. No repeated parsing, no include-order issues, no macro leakage, faster builds.',
+      code:`<span class="cm">// old way</span>
+<span class="cm">#include "math.h"   // pastes the whole file</span>
+
+<span class="cm">// new way</span>
+<span class="kw">import</span> <span class="ty">math</span>;        <span class="cm">// compiled binary interface</span>
+<span class="kw">import</span> std;          <span class="cm">// entire stdlib — C++23</span>` },
+    { name:'defining a module',
+      code:`<span class="cm">// math.cppm — module unit</span>
+<span class="kw">export module</span> <span class="ty">math</span>;
+
+<span class="kw">export int</span> <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b) { <span class="kw">return</span> a+b; }
+
+<span class="kw">int</span> <span class="fn">helper</span>() { <span class="kw">return</span> <span class="li">0</span>; }  <span class="cm">// not exported — private</span>` },
+    { name:'importing a module',
+      code:`<span class="cm">// main.cpp</span>
+<span class="kw">import</span> <span class="ty">math</span>;
+<span class="kw">import</span> &lt;iostream&gt;;  <span class="cm">// header-unit (transitional)</span>
+
+<span class="kw">int</span> <span class="fn">main</span>() { std::cout &lt;&lt; <span class="fn">add</span>(<span class="li">1</span>,<span class="li">2</span>); }` },
+    { name:'module partitions', desc:'Split a large module across files.',
+      code:`<span class="cm">// math-core.cppm</span>
+<span class="kw">export module</span> <span class="ty">math</span>:<span class="ty">core</span>;
+<span class="kw">export int</span> <span class="fn">add</span>(<span class="kw">int</span>,<span class="kw">int</span>);
+
+<span class="cm">// math.cppm — re-export partition</span>
+<span class="kw">export module</span> <span class="ty">math</span>;
+<span class="kw">export import</span> :<span class="ty">core</span>;`, tip:'Compiler support (MSVC, Clang 16+, GCC 14+) is good but CMake support is still maturing. Use with CMake 3.28+.' },
+  ]},
+
+  // ── TOOLING ──────────────────────────────────────────
+  { id:'tooling-cmake', cat:'tooling', title:'CMake', concepts:[
+    { name:'minimal CMakeLists.txt',
+      code:`cmake_minimum_required(VERSION 3.20)
+project(MyApp LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 20)
+
+add_executable(app
+  src/main.cpp
+  src/util.cpp
+)` },
+    { name:'libraries & targets',
+      code:`<span class="cm"># static library</span>
+add_library(mylib STATIC lib/foo.cpp)
+
+<span class="cm"># shared library</span>
+add_library(mylib SHARED lib/foo.cpp)
+
+<span class="cm"># interface (header-only)</span>
+add_library(mylib INTERFACE)
+
+target_include_directories(mylib PUBLIC include/)
+target_link_libraries(app PRIVATE mylib)` },
+    { name:'find & fetch dependencies',
+      code:`<span class="cm"># find system package</span>
+find_package(OpenSSL REQUIRED)
+target_link_libraries(app PRIVATE OpenSSL::SSL)
+
+<span class="cm"># FetchContent (auto-download)</span>
+include(FetchContent)
+FetchContent_Declare(json
+  GIT_REPOSITORY https://github.com/nlohmann/json
+  GIT_TAG v3.11.3)
+FetchContent_MakeAvailable(json)
+target_link_libraries(app PRIVATE nlohmann_json::nlohmann_json)` },
+    { name:'common options & presets',
+      code:`<span class="cm"># compile options per target</span>
+target_compile_options(app PRIVATE -Wall -Wextra)
+
+<span class="cm"># compile definitions</span>
+target_compile_definitions(app PRIVATE MYAPP_DEBUG=1)
+
+<span class="cm"># build & run</span>
+cmake -B build -DCMAKE_BUILD_TYPE=Debug
+cmake --build build -j$(nproc)
+./build/app` },
+  ]},
+
+  { id:'tooling-sanitizers', cat:'tooling', title:'sanitizers', concepts:[
+    { name:'AddressSanitizer (ASan)', desc:'Detects heap/stack/global buffer overflows, use-after-free, memory leaks.',
+      code:`g++ -fsanitize=address -fno-omit-frame-pointer -g
+<span class="cm"># detects:</span>
+<span class="cm">#  heap overflow, stack overflow</span>
+<span class="cm">#  use-after-free, use-after-scope</span>
+<span class="cm">#  double-free, memory leaks</span>
+ASAN_OPTIONS=detect_leaks=1 ./app` },
+    { name:'UndefinedBehaviourSanitizer (UBSan)', desc:'Catches signed overflow, null deref, misaligned access, invalid shifts.',
+      code:`g++ -fsanitize=undefined -g
+<span class="cm"># catches:</span>
+<span class="cm">#  signed integer overflow</span>
+<span class="cm">#  null pointer dereference</span>
+<span class="cm">#  misaligned pointer use</span>
+<span class="cm">#  invalid enum values</span>
+UBSAN_OPTIONS=print_stacktrace=1 ./app` },
+    { name:'ThreadSanitizer (TSan)', desc:'Detects data races in multithreaded code.',
+      code:`g++ -fsanitize=thread -g
+<span class="cm"># NOTE: incompatible with ASan</span>
+<span class="cm"># detects data races, lock-order violations</span>` },
+    { name:'combining sanitizers',
+      code:`<span class="cm"># ASan + UBSan (common combo)</span>
+g++ -fsanitize=address,undefined -g
+
+<span class="cm"># CMake</span>
+target_compile_options(app PRIVATE
+  -fsanitize=address,undefined)
+target_link_options(app PRIVATE
+  -fsanitize=address,undefined)`, tip:'Always compile with -g for readable stack traces. Sanitizers add ~2x runtime overhead — use in debug/CI, not production.' },
+  ]},
+
+  { id:'tooling-debug', cat:'tooling', title:'debugging', concepts:[
+    { name:'gdb essentials',
+      code:`g++ -g -O0 main.cpp -o app   <span class="cm"># debug build</span>
+gdb ./app
+
+<span class="cm"># common commands</span>
+run [args]      <span class="cm"># start program</span>
+break main      <span class="cm"># breakpoint at function</span>
+break foo.cpp:42<span class="cm"># breakpoint at line</span>
+next / step     <span class="cm"># step over / into</span>
+continue        <span class="cm"># resume to next break</span>
+print x         <span class="cm"># print variable</span>
+backtrace       <span class="cm"># show call stack</span>
+watch x         <span class="cm"># break when x changes</span>
+quit            <span class="cm"># exit gdb</span>` },
+    { name:'lldb (macOS / Clang)',
+      code:`lldb ./app
+process launch -- arg1
+breakpoint set --name main
+breakpoint set --file foo.cpp --line 42
+thread step-over     <span class="cm"># next</span>
+thread step-in       <span class="cm"># step</span>
+frame variable x     <span class="cm"># print x</span>
+bt                   <span class="cm"># backtrace</span>` },
+    { name:'Valgrind', desc:'Detects memory errors without recompilation. Slower than ASan but more thorough.',
+      code:`valgrind --leak-check=full ./app
+valgrind --tool=callgrind ./app  <span class="cm"># profiling</span>
+callgrind_annotate callgrind.out.*` },
+    { name:'Compiler Explorer (godbolt.org)', desc:'Inspect assembly output, compare compilers, share snippets — invaluable for understanding what the compiler actually does.',
+      code:`<span class="cm"># compile flags to try on godbolt</span>
+-O2 -std=c++20           <span class="cm"># optimised</span>
+-O0 -g                   <span class="cm"># debug, readable asm</span>
+-fsanitize=address       <span class="cm"># see sanitizer overhead</span>` },
+  ]},
+
+  { id:'tooling-profiling', cat:'tooling', title:'profiling', concepts:[
+    { name:'perf (Linux)', desc:'Low-overhead sampling profiler using hardware counters.',
+      code:`g++ -O2 -g main.cpp -o app  <span class="cm"># keep symbols</span>
+perf record ./app
+perf report                 <span class="cm"># interactive TUI</span>
+
+<span class="cm"># count specific events</span>
+perf stat ./app
+perf stat -e cache-misses,instructions ./app` },
+    { name:'gprof',
+      code:`g++ -pg -O2 main.cpp -o app  <span class="cm"># -pg instruments</span>
+./app                         <span class="cm"># produces gmon.out</span>
+gprof app gmon.out | less     <span class="cm"># flat + call graph</span>` },
+    { name:'Google Benchmark', desc:'Micro-benchmark library — measure individual functions with statistical rigour.',
+      code:`<span class="cm">#include &lt;benchmark/benchmark.h&gt;</span>
+
+<span class="kw">static void</span> <span class="fn">BM_sort</span>(benchmark::<span class="ty">State</span>&amp; s) {
+  std::<span class="ty">vector</span>&lt;<span class="kw">int</span>&gt; v(<span class="li">1000</span>);
+  <span class="kw">for</span> (<span class="kw">auto</span> _ : s) {
+    std::ranges::<span class="fn">sort</span>(v);
+    benchmark::<span class="fn">DoNotOptimize</span>(v);
+  }
+}
+BENCHMARK(BM_sort);
+BENCHMARK_MAIN();` },
+    { name:'profiling rules of thumb',
+      code:`<span class="cm">// 1. Profile BEFORE optimising — measure first</span>
+<span class="cm">// 2. Compile with -O2 -g for realistic results</span>
+<span class="cm">// 3. 80/20 rule: 20% of code = 80% of runtime</span>
+<span class="cm">// 4. Cache misses often dominate — check AoS/SoA</span>
+<span class="cm">// 5. Use DoNotOptimize() to prevent dead-code elim</span>
+<span class="cm">// 6. Benchmark realistic data sizes</span>`, tip:'Hotspot tools: Instruments (macOS), VTune (Intel), Tracy (game dev), Superluminal (Windows).' },
+  ]},
 ];
+
 
 // ── Build DOM ──
 function renderAll(items) {
   const root = document.getElementById('content-root');
   root.innerHTML = '';
   // Group by category in order
-  const catOrder = ['lang','arch','perf','mem','safe','concur'];
-  const catLabels = { lang:'Language Mastery', arch:'Architecture', perf:'Performance', mem:'Memory', safe:'Safety', concur:'Concurrency' };
+  const catOrder = ['fund','lang','arch','perf','mem','safe','concur','stdlib','idioms','tooling','build'];
+  const catLabels = { lang:'Language Mastery', arch:'Architecture', perf:'Performance', mem:'Memory', safe:'Safety', concur:'Concurrency', fund:'Fundamentals', build:'Build & Linking', stdlib:'Standard Library', idioms:'Idioms & Patterns', tooling:'Tooling' };
   const grouped = {};
   for (const d of items) {
     if (!grouped[d.cat]) grouped[d.cat] = [];

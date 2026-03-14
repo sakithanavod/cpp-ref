@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C++ Reference Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f12;
+    --bg2: #13161b;
+    --bg3: #1a1e25;
+    --bg4: #222730;
+    --border: #2a2f3a;
+    --border2: #353b47;
+    --text: #e2e6ef;
+    --text2: #8e96a8;
+    --text3: #5a6070;
+    --accent: #4f9cf9;
+    --accent2: #3b7dd8;
+    --green: #3ecf8e;
+    --amber: #f5a623;
+    --coral: #ff6b6b;
+    --purple: #a78bfa;
+    --teal: #2dd4bf;
+    --pink: #f472b6;
+
+    --lang: #a78bfa;
+    --lang-bg: rgba(167,139,250,0.12);
+    --arch: #2dd4bf;
+    --arch-bg: rgba(45,212,191,0.12);
+    --perf: #f5a623;
+    --perf-bg: rgba(245,166,35,0.12);
+    --mem: #ff6b6b;
+    --mem-bg: rgba(255,107,107,0.12);
+    --safe: #3ecf8e;
+    --safe-bg: rgba(62,207,142,0.12);
+    --concur: #4f9cf9;
+    --concur-bg: rgba(79,156,249,0.12);
+
+    --nav-w: 240px;
+    --radius: 8px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ── Sidebar ── */
+  nav {
+    width: var(--nav-w);
+    min-width: var(--nav-w);
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 2rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border2) transparent;
+  }
+
+  .nav-header {
+    padding: 1.5rem 1.25rem 1rem;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg2);
+    z-index: 10;
+  }
+  .nav-header h1 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.5px;
+  }
+  .nav-header p {
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 3px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .nav-search {
+    margin: 0.75rem 1rem;
+  }
+  .nav-search input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 6px 10px 6px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235a6070' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 9px center;
+  }
+  .nav-search input:focus { border-color: var(--accent); }
+  .nav-search input::placeholder { color: var(--text3); }
+
+  .nav-section {
+    margin-top: 0.25rem;
+  }
+  .nav-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--text3);
+    padding: 0.75rem 1.25rem 0.25rem;
+  }
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 1.25rem;
+    text-decoration: none;
+    color: var(--text2);
+    font-size: 12.5px;
+    font-family: 'JetBrains Mono', monospace;
+    border-left: 2px solid transparent;
+    transition: all 0.12s;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+  }
+  .nav-link:hover { color: var(--text); background: var(--bg3); }
+  .nav-link.active {
+    color: var(--text);
+    background: var(--bg4);
+  }
+  .nav-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Main content ── */
+  main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2.5rem 2rem 4rem;
+    max-width: 1100px;
+  }
+
+  .page-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-header h1 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  .page-header p {
+    color: var(--text2);
+    font-size: 13px;
+  }
+  .version-pills {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border2);
+    color: var(--text3);
+  }
+
+  /* ── Filter bar ── */
+  .filter-bar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover { background: var(--bg3); color: var(--text); }
+  .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* ── Category sections ── */
+  .category-section {
+    margin-bottom: 3rem;
+  }
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .category-header h2 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.3px;
+  }
+  .cat-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 12px;
+  }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .card:hover { border-color: var(--border2); transform: translateY(-1px); }
+
+  .card-head {
+    padding: 10px 14px 9px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .card-head h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    flex: 1;
+  }
+  .card-body { padding: 10px 14px 12px; }
+
+  .concept { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .concept:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+  .concept-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .concept-desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.55;
+    margin-bottom: 6px;
+  }
+
+  pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 10px;
+    overflow-x: auto;
+    line-height: 1.6;
+    color: var(--text2);
+    tab-size: 2;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .kw  { color: #c792ea; }
+  .ty  { color: #82aaff; }
+  .fn  { color: #82cfff; }
+  .li  { color: #f78c6c; }
+  .cm  { color: var(--text3); font-style: italic; }
+  .st  { color: #c3e88d; }
+
+  .tip {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--amber);
+    background: rgba(245,166,35,0.08);
+    border-left: 2px solid var(--amber);
+    padding: 5px 8px;
+    border-radius: 0 4px 4px 0;
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* ── Back to top ── */
+  #back-top {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    color: var(--text2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 6px 12px;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  #back-top.visible { opacity: 1; pointer-events: all; }
+  #back-top:hover { background: var(--bg4); color: var(--text); }
+
+  /* ── No results ── */
+  .no-results {
+    display: none;
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text3);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+  .no-results.show { display: block; }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+  /* ── Mobile ── */
+  @media (max-width: 700px) {
+    nav { display: none; }
+    main { padding: 1.5rem 1rem 3rem; }
+    .cards-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Sidebar Navigation ── -->
+<nav id="sidebar">
+  <div class="nav-header">
+    <h1>C++ Reference</h1>
+    <p>C++11 / 14 / 17 / 20 / 23</p>
+  </div>
+
+  <div class="nav-search">
+    <input type="text" id="search-input" placeholder="search concepts..." autocomplete="off">
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Language</div>
+    <a class="nav-link" href="#lang-constructors"><span class="nav-dot" style="background:var(--lang)"></span>constructors</a>
+    <a class="nav-link" href="#lang-move"><span class="nav-dot" style="background:var(--lang)"></span>move semantics</a>
+    <a class="nav-link" href="#lang-casting"><span class="nav-dot" style="background:var(--lang)"></span>casting</a>
+    <a class="nav-link" href="#lang-namespaces"><span class="nav-dot" style="background:var(--lang)"></span>namespaces</a>
+    <a class="nav-link" href="#lang-lambdas"><span class="nav-dot" style="background:var(--lang)"></span>lambdas</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Architecture</div>
+    <a class="nav-link" href="#arch-virtual"><span class="nav-dot" style="background:var(--arch)"></span>virtual functions</a>
+    <a class="nav-link" href="#arch-interfaces"><span class="nav-dot" style="background:var(--arch)"></span>interfaces</a>
+    <a class="nav-link" href="#arch-templates"><span class="nav-dot" style="background:var(--arch)"></span>templates</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Performance</div>
+    <a class="nav-link" href="#perf-forwarding"><span class="nav-dot" style="background:var(--perf)"></span>perfect forwarding</a>
+    <a class="nav-link" href="#perf-cache"><span class="nav-dot" style="background:var(--perf)"></span>cache-friendly</a>
+    <a class="nav-link" href="#perf-compiler"><span class="nav-dot" style="background:var(--perf)"></span>compiler hints</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Memory</div>
+    <a class="nav-link" href="#mem-smart"><span class="nav-dot" style="background:var(--mem)"></span>smart pointers</a>
+    <a class="nav-link" href="#mem-raii"><span class="nav-dot" style="background:var(--mem)"></span>RAII</a>
+    <a class="nav-link" href="#mem-alloc"><span class="nav-dot" style="background:var(--mem)"></span>custom allocators</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Safety</div>
+    <a class="nav-link" href="#safe-error"><span class="nav-dot" style="background:var(--safe)"></span>error handling</a>
+    <a class="nav-link" href="#safe-types"><span class="nav-dot" style="background:var(--safe)"></span>type safety</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Concurrency</div>
+    <a class="nav-link" href="#concur-basics"><span class="nav-dot" style="background:var(--concur)"></span>concurrency basics</a>
+  </div>
+</nav>
+
+<!-- ── Main ── -->
+<main id="main-content">
+  <div class="page-header">
+    <h1>C++ Reference Guide</h1>
+    <p>A comprehensive cheat sheet for modern C++ programming concepts.</p>
+    <div class="version-pills">
+      <span class="pill">C++11</span>
+      <span class="pill">C++14</span>
+      <span class="pill">C++17</span>
+      <span class="pill">C++20</span>
+      <span class="pill">C++23</span>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" data-cat="all">all</button>
+    <button class="filter-btn" data-cat="lang" style="--c:var(--lang)">language</button>
+    <button class="filter-btn" data-cat="arch" style="--c:var(--arch)">architecture</button>
+    <button class="filter-btn" data-cat="perf" style="--c:var(--perf)">performance</button>
+    <button class="filter-btn" data-cat="mem"  style="--c:var(--mem)">memory</button>
+    <button class="filter-btn" data-cat="safe" style="--c:var(--safe)">safety</button>
+    <button class="filter-btn" data-cat="concur" style="--c:var(--concur)">concurrency</button>
+  </div>
+
+  <div id="content-root"></div>
+  <div class="no-results" id="no-results">no results found</div>
+</main>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ top</button>
+
+<script>
+const CAT_META = {
+  lang:   { label:'language',    color:'var(--lang)',   bg:'var(--lang-bg)'  },
+  arch:   { label:'architecture',color:'var(--arch)',   bg:'var(--arch-bg)'  },
+  perf:   { label:'performance', color:'var(--perf)',   bg:'var(--perf-bg)'  },
+  mem:    { label:'memory',      color:'var(--mem)',    bg:'var(--mem-bg)'   },
+  safe:   { label:'safety',      color:'var(--safe)',   bg:'var(--safe-bg)'  },
+  concur: { label:'concurrency', color:'var(--concur)', bg:'var(--concur-bg)'},
+};
+
+const DATA = [
+  { id:'lang-constructors', cat:'lang', title:'constructors', concepts:[
+    { name:'default / copy / move', desc:'Compiler-generated special members. Declare =default or =delete to control.',
+      code:`<span class="kw">struct</span> <span class="ty">Foo</span> {
+  <span class="ty">Foo</span>() = <span class="kw">default</span>;          <span class="cm">// default ctor</span>
+  <span class="ty">Foo</span>(<span class="kw">const</span> <span class="ty">Foo</span>&amp;) = <span class="kw">delete</span>;  <span class="cm">// no copy</span>
+  <span class="ty">Foo</span>(<span class="ty">Foo</span>&amp;&amp;) = <span class="kw">default</span>;    <span class="cm">// move ok</span>
+};`, tip:'Rule of 5: if you define any of dtor/copy/move, define all five.' },
+    { name:'initialiser list', desc:'Members init before body — required for const/ref members.',
+      code:`<span class="kw">struct</span> <span class="ty">Bar</span> {
+  <span class="kw">const int</span> n;
+  <span class="ty">Bar</span>(<span class="kw">int</span> v) : n(v) {}   <span class="cm">// init list</span>
+};` },
+    { name:'delegating ctor (C++11)', desc:'One ctor calls another to avoid duplication.',
+      code:`<span class="ty">Baz</span>() : <span class="ty">Baz</span>(<span class="li">0</span>) {}
+<span class="ty">Baz</span>(<span class="kw">int</span> v) : val(v) {}` },
+    { name:'explicit', desc:'Prevents implicit single-argument conversions.',
+      code:`<span class="kw">explicit</span> <span class="ty">MyStr</span>(<span class="kw">int</span> capacity);
+<span class="cm">// MyStr s = 42;  // error</span>` },
+  ]},
+  { id:'lang-move', cat:'lang', title:'move semantics', concepts:[
+    { name:'rvalue references', desc:'T&& binds to temporaries / moved-from objects.',
+      code:`<span class="kw">void</span> <span class="fn">take</span>(<span class="ty">std::string</span>&amp;&amp;);
+<span class="ty">std::string</span> s = <span class="st">"hi"</span>;
+<span class="fn">take</span>(std::move(s));   <span class="cm">// s valid but unspecified</span>`, tip:"After std::move, treat the source as 'empty but destructible'." },
+    { name:'move constructor / assignment',
+      code:`<span class="ty">Buf</span>(<span class="ty">Buf</span>&amp;&amp; o) <span class="kw">noexcept</span>
+  : data(o.data), sz(o.sz) {
+  o.data = <span class="kw">nullptr</span>; o.sz = <span class="li">0</span>;
+}`, tip:'Mark noexcept — STL containers only move if noexcept.' },
+  ]},
+  { id:'lang-casting', cat:'lang', title:'casting', concepts:[
+    { name:'static_cast', desc:'Compile-time checked. Use for numeric conversions and known-safe casts.',
+      code:`<span class="kw">double</span> d = <span class="fn">static_cast</span>&lt;<span class="kw">double</span>&gt;(i);` },
+    { name:'dynamic_cast', desc:'Runtime-checked downcast via RTTI. Returns nullptr on pointer failure or throws on reference.',
+      code:`<span class="ty">Derived</span>* p = <span class="fn">dynamic_cast</span>&lt;<span class="ty">Derived</span>*&gt;(base);
+<span class="kw">if</span> (p) { <span class="cm">/* safe to use */</span> }` },
+    { name:'const_cast / reinterpret_cast', desc:'const_cast removes const (UB if originally const). reinterpret_cast is low-level bitwise reinterpretation.',
+      code:`<span class="cm">// use sparingly — both are escape hatches</span>`, tip:'Prefer not using either. Document clearly when you must.' },
+  ]},
+  { id:'lang-namespaces', cat:'lang', title:'namespaces', concepts:[
+    { name:'declaration & nesting',
+      code:`<span class="kw">namespace</span> <span class="ty">io</span>::<span class="ty">net</span> {   <span class="cm">// C++17 nested</span>
+  <span class="kw">void</span> <span class="fn">connect</span>();
+}` },
+    { name:'anonymous namespace', desc:'Internal linkage — replaces static at file scope.',
+      code:`<span class="kw">namespace</span> {
+  <span class="kw">int</span> local_helper = <span class="li">42</span>;
+}` },
+    { name:'using / aliases',
+      code:`<span class="kw">using namespace</span> std;       <span class="cm">// avoid in headers!</span>
+<span class="kw">namespace</span> <span class="ty">fs</span> = std::filesystem;
+<span class="kw">using</span> <span class="ty">Vec</span> = std::vector&lt;<span class="kw">int</span>&gt;;` },
+  ]},
+  { id:'lang-lambdas', cat:'lang', title:'lambdas', concepts:[
+    { name:'syntax',
+      code:`<span class="kw">auto</span> add = [](<span class="kw">int</span> a, <span class="kw">int</span> b) -&gt; <span class="kw">int</span> {
+  <span class="kw">return</span> a + b;
+};` },
+    { name:'captures',
+      code:`<span class="kw">int</span> x = <span class="li">5</span>;
+<span class="kw">auto</span> f = [x]    { <span class="cm">/* copy x   */</span> };
+<span class="kw">auto</span> g = [&amp;x]   { <span class="cm">/* ref x    */</span> };
+<span class="kw">auto</span> h = [=]    { <span class="cm">/* copy all */</span> };
+<span class="kw">auto</span> k = [&amp;]    { <span class="cm">/* ref all  */</span> };
+<span class="kw">auto</span> m = [<span class="kw">this</span>] { <span class="cm">/* members  */</span> };`,
+      tip:'Avoid [&] in async contexts — dangling reference risk.' },
+    { name:'generic lambda (C++14)',
+      code:`<span class="kw">auto</span> sq = [](<span class="kw">auto</span> x) { <span class="kw">return</span> x * x; };` },
+    { name:'IIFE', desc:'Immediately-invoked — useful for complex const initialisation.',
+      code:`<span class="kw">const auto</span> cfg = [&amp;]() {
+  <span class="cm">// complex setup...</span>
+  <span class="kw">return</span> <span class="fn">build</span>();
+}();` },
+  ]},
+  { id:'arch-virtual', cat:'arch', title:'virtual functions', concepts:[
+    { name:'vtable dispatch', desc:'virtual enables runtime polymorphism via a per-class vtable.',
+      code:`<span class="kw">struct</span> <span class="ty">Animal</span> {
+  <span class="kw">virtual void</span> <span class="fn">speak</span>() <span class="kw">const</span> = <span class="li">0</span>; <span class="cm">// pure</span>
+  <span class="kw">virtual</span> ~<span class="ty">Animal</span>() = <span class="kw">default</span>;
+};
+<span class="kw">struct</span> <span class="ty">Dog</span> : <span class="ty">Animal</span> {
+  <span class="kw">void</span> <span class="fn">speak</span>() <span class="kw">const override</span> {}
+};`, tip:'Always virtual-destruct base classes. override is compile-time checked.' },
+    { name:'final', desc:'Prevents further overriding or inheritance.',
+      code:`<span class="kw">struct</span> <span class="ty">Leaf</span> <span class="kw">final</span> : <span class="ty">Base</span> {};
+<span class="kw">void</span> <span class="fn">f</span>() <span class="kw">final override</span>;` },
+  ]},
+  { id:'arch-interfaces', cat:'arch', title:'interfaces (ABCs)', concepts:[
+    { name:'pure abstract class', desc:'All public pure virtuals, virtual destructor, no data.',
+      code:`<span class="kw">struct</span> <span class="ty">ISerializer</span> {
+  <span class="kw">virtual</span> <span class="ty">std::string</span> <span class="fn">encode</span>(<span class="kw">const</span> <span class="ty">Data</span>&amp;) = <span class="li">0</span>;
+  <span class="kw">virtual</span> <span class="ty">Data</span>        <span class="fn">decode</span>(<span class="ty">std::string_view</span>) = <span class="li">0</span>;
+  <span class="kw">virtual</span> ~<span class="ty">ISerializer</span>() = <span class="kw">default</span>;
+};` },
+    { name:'non-virtual interface (NVI)', desc:'Public non-virtual wrapper calls private virtual. Enforces pre/post conditions.',
+      code:`<span class="kw">void</span> <span class="fn">draw</span>() {          <span class="cm">// public, non-virtual</span>
+  <span class="fn">setup</span>();
+  <span class="fn">doDraw</span>();             <span class="cm">// private virtual</span>
+  <span class="fn">teardown</span>();
+}` },
+  ]},
+  { id:'arch-templates', cat:'arch', title:'templates', concepts:[
+    { name:'function & class templates',
+      code:`<span class="kw">template</span>&lt;<span class="kw">typename</span> <span class="ty">T</span>&gt;
+<span class="ty">T</span> <span class="fn">max</span>(<span class="ty">T</span> a, <span class="ty">T</span> b) { <span class="kw">return</span> a &gt; b ? a : b; }
+
+<span class="kw">template</span>&lt;<span class="kw">typename</span> <span class="ty">T</span>, <span class="kw">size_t</span> <span class="ty">N</span>&gt;
+<span class="kw">struct</span> <span class="ty">Array</span> { <span class="ty">T</span> data[N]; };` },
+    { name:'concepts (C++20)', desc:'Constrain template parameters for clearer compiler errors.',
+      code:`<span class="kw">template</span>&lt;<span class="ty">std::integral</span> <span class="ty">T</span>&gt;
+<span class="ty">T</span> <span class="fn">add</span>(<span class="ty">T</span> a, <span class="ty">T</span> b) { <span class="kw">return</span> a + b; }` },
+    { name:'variadic templates',
+      code:`<span class="kw">template</span>&lt;<span class="kw">typename</span>... <span class="ty">Args</span>&gt;
+<span class="kw">void</span> <span class="fn">log</span>(<span class="ty">Args</span>&amp;&amp;... args) {
+  (std::cout &lt;&lt; ... &lt;&lt; args); <span class="cm">// fold expr</span>
+}` },
+    { name:'if constexpr (C++17)',
+      code:`<span class="kw">if constexpr</span> (std::is_integral_v&lt;<span class="ty">T</span>&gt;) {
+  <span class="cm">// int path — dead code eliminated</span>
+} <span class="kw">else</span> {
+  <span class="cm">// float path</span>
+}` },
+  ]},
+  { id:'perf-forwarding', cat:'perf', title:'perfect forwarding', concepts:[
+    { name:'forwarding references', desc:'T&& in a template deduces as lvalue or rvalue. std::forward preserves the value category.',
+      code:`<span class="kw">template</span>&lt;<span class="kw">typename</span> <span class="ty">T</span>&gt;
+<span class="kw">void</span> <span class="fn">relay</span>(<span class="ty">T</span>&amp;&amp; v) {
+  <span class="fn">sink</span>(std::forward&lt;<span class="ty">T</span>&gt;(v)); <span class="cm">// perfect forward</span>
+}`, tip:'Only valid inside a template. Without forward, T&& is just an rvalue ref.' },
+    { name:'emplace vs push', desc:'emplace_back forwards args directly into the container, avoiding extra copies.',
+      code:`vec.<span class="fn">emplace_back</span>(<span class="li">42</span>, <span class="st">"hello"</span>); <span class="cm">// in-place</span>
+vec.<span class="fn">push_back</span>({<span class="li">42</span>, <span class="st">"hello"</span>});  <span class="cm">// temp + move</span>` },
+  ]},
+  { id:'perf-cache', cat:'perf', title:'cache-friendly structures', concepts:[
+    { name:'AoS vs SoA', desc:'Array of Structs vs Struct of Arrays — SoA is friendlier to SIMD and the prefetcher.',
+      code:`<span class="cm">// AoS — bad for per-field loops</span>
+<span class="kw">struct</span> <span class="ty">Particle</span> { <span class="kw">float</span> x,y,z,mass; };
+<span class="ty">Particle</span> p[N];
+
+<span class="cm">// SoA — contiguous per field</span>
+<span class="kw">struct</span> <span class="ty">Particles</span> {
+  <span class="kw">float</span> x[N], y[N], z[N], mass[N];
+};` },
+    { name:'alignas / alignof',
+      code:`<span class="kw">alignas</span>(<span class="li">64</span>) <span class="kw">float</span> buf[<span class="li">16</span>]; <span class="cm">// cache-line align</span>
+<span class="kw">static_assert</span>(<span class="kw">alignof</span>(<span class="ty">T</span>) &lt;= <span class="li">16</span>);` },
+    { name:'[[likely]] / [[unlikely]] (C++20)',
+      code:`<span class="kw">if</span> ([[likely]] ok)   { <span class="cm">/* fast path */</span> }
+<span class="kw">if</span> ([[unlikely]] err) { <span class="cm">/* slow path */</span> }` },
+  ]},
+  { id:'perf-compiler', cat:'perf', title:'inlining & compiler hints', concepts:[
+    { name:'inline / __forceinline', desc:'Suggest inlining for hot small functions. Modern compilers usually decide better.',
+      code:`<span class="kw">inline int</span> <span class="fn">square</span>(<span class="kw">int</span> x) { <span class="kw">return</span> x*x; }` },
+    { name:'noexcept', desc:'Enables optimisations — no exception table, enables vector move.',
+      code:`<span class="kw">void</span> <span class="fn">swap</span>(<span class="ty">Foo</span>&amp; a, <span class="ty">Foo</span>&amp; b) <span class="kw">noexcept</span>;` },
+    { name:'constexpr / consteval (C++20)', desc:'Evaluate at compile time — zero runtime cost.',
+      code:`<span class="kw">constexpr int</span> <span class="fn">fib</span>(<span class="kw">int</span> n) {
+  <span class="kw">return</span> n &lt; <span class="li">2</span> ? n : <span class="fn">fib</span>(n-<span class="li">1</span>) + <span class="fn">fib</span>(n-<span class="li">2</span>);
+}
+<span class="kw">consteval int</span> <span class="fn">always_ct</span>(<span class="kw">int</span> n); <span class="cm">// C++20</span>` },
+  ]},
+  { id:'mem-smart', cat:'mem', title:'smart pointers', concepts:[
+    { name:'unique_ptr', desc:'Sole ownership. Zero overhead vs raw pointer.',
+      code:`<span class="kw">auto</span> p = std::<span class="fn">make_unique</span>&lt;<span class="ty">Foo</span>&gt;(<span class="li">42</span>);
+p-&gt;<span class="fn">bar</span>();
+<span class="cm">// freed on scope exit, no delete needed</span>` },
+    { name:'shared_ptr / weak_ptr', desc:'shared_ptr is ref-counted. weak_ptr breaks cycles without taking ownership.',
+      code:`<span class="kw">auto</span> sp = std::<span class="fn">make_shared</span>&lt;<span class="ty">Node</span>&gt;();
+std::<span class="ty">weak_ptr</span>&lt;<span class="ty">Node</span>&gt; wp = sp;
+<span class="kw">if</span> (<span class="kw">auto</span> locked = wp.<span class="fn">lock</span>()) {
+  <span class="cm">// safe to use</span>
+}`, tip:'Prefer unique_ptr; only use shared when shared ownership is truly needed.' },
+  ]},
+  { id:'mem-raii', cat:'mem', title:'RAII', concepts:[
+    { name:'resource acquisition is initialization', desc:'Bind resource lifetime to object lifetime — ctor acquires, dtor releases.',
+      code:`<span class="kw">struct</span> <span class="ty">Lock</span> {
+  <span class="ty">std::mutex</span>&amp; m;
+  <span class="ty">Lock</span>(<span class="ty">std::mutex</span>&amp; mx) : m(mx) { m.<span class="fn">lock</span>(); }
+  ~<span class="ty">Lock</span>() { m.<span class="fn">unlock</span>(); }
+};
+<span class="cm">// std::lock_guard does this for you</span>`, tip:'Every resource (file, socket, mutex, allocation) deserves an RAII wrapper.' },
+    { name:'scope_exit pattern',
+      code:`<span class="kw">auto</span> cleanup = [&amp;]{ <span class="fn">closeHandle</span>(h); };
+<span class="cm">// C++23: std::scope_exit</span>` },
+  ]},
+  { id:'mem-alloc', cat:'mem', title:'custom allocators', concepts:[
+    { name:'pool / arena allocator', desc:'Pre-allocate a chunk; bump a pointer per alloc. O(1) alloc/free, great for same-sized objects.',
+      code:`<span class="kw">struct</span> <span class="ty">Arena</span> {
+  <span class="kw">char</span> buf[<span class="li">4096</span>]; <span class="kw">size_t</span> offset = <span class="li">0</span>;
+  <span class="kw">void</span>* <span class="fn">alloc</span>(<span class="kw">size_t</span> n) {
+    <span class="kw">void</span>* p = buf + offset;
+    offset += n; <span class="kw">return</span> p;
+  }
+};` },
+    { name:'PMR (C++17)', desc:'std::pmr::polymorphic_allocator lets containers use custom memory resources.',
+      code:`std::<span class="ty">pmr::monotonic_buffer_resource</span> pool;
+std::<span class="ty">pmr::vector</span>&lt;<span class="kw">int</span>&gt; v(&amp;pool);` },
+    { name:'placement new',
+      code:`<span class="kw">alignas</span>(<span class="ty">Foo</span>) <span class="kw">char</span> buf[<span class="kw">sizeof</span>(<span class="ty">Foo</span>)];
+<span class="ty">Foo</span>* p = <span class="kw">new</span> (buf) <span class="ty">Foo</span>(<span class="li">42</span>);
+p-&gt;~<span class="ty">Foo</span>();   <span class="cm">// explicit dtor required</span>`, tip:'You must call the destructor explicitly when using placement new.' },
+  ]},
+  { id:'safe-error', cat:'safe', title:'error handling', concepts:[
+    { name:'exceptions', desc:'Use for exceptional (unexpected) failures. Always catch by const ref.',
+      code:`<span class="kw">try</span> {
+  <span class="fn">risky</span>();
+} <span class="kw">catch</span> (<span class="kw">const</span> <span class="ty">std::exception</span>&amp; e) {
+  std::cerr &lt;&lt; e.<span class="fn">what</span>();
+}` },
+    { name:'std::expected (C++23)', desc:'Return either a value or an error — no exceptions, zero cost on happy path.',
+      code:`std::<span class="ty">expected</span>&lt;<span class="kw">int</span>, <span class="ty">Err</span>&gt; <span class="fn">parse</span>(<span class="ty">std::string_view</span>);
+<span class="kw">auto</span> r = <span class="fn">parse</span>(<span class="st">"42"</span>);
+<span class="kw">if</span> (r) <span class="fn">use</span>(*r); <span class="kw">else</span> <span class="fn">handle</span>(r.error());` },
+    { name:'std::optional', desc:'Nullable value without heap allocation.',
+      code:`std::<span class="ty">optional</span>&lt;<span class="kw">int</span>&gt; <span class="fn">find</span>(<span class="ty">Vec</span>&amp;, <span class="kw">int</span>);
+<span class="kw">if</span> (<span class="kw">auto</span> v = <span class="fn">find</span>(vec, <span class="li">5</span>)) { <span class="fn">use</span>(*v); }` },
+  ]},
+  { id:'safe-types', cat:'safe', title:'type safety', concepts:[
+    { name:'enum class', desc:'Scoped and strongly typed — no implicit int conversions.',
+      code:`<span class="kw">enum class</span> <span class="ty">Color</span> { Red, Green, Blue };
+<span class="ty">Color</span> c = <span class="ty">Color</span>::Red;
+<span class="cm">// int i = c;  // error</span>` },
+    { name:'std::variant', desc:'Type-safe tagged union. Use std::visit for exhaustive matching.',
+      code:`std::<span class="ty">variant</span>&lt;<span class="kw">int</span>, <span class="ty">std::string</span>&gt; v = <span class="li">42</span>;
+std::<span class="fn">visit</span>([](<span class="kw">auto</span> x){ <span class="fn">use</span>(x); }, v);` },
+    { name:'std::span (C++20)', desc:'Non-owning view over contiguous data — replaces raw pointer + length pairs.',
+      code:`<span class="kw">void</span> <span class="fn">process</span>(std::<span class="ty">span</span>&lt;<span class="kw">const int</span>&gt; data);
+<span class="fn">process</span>(vec);    <span class="cm">// works with vector/array</span>` },
+  ]},
+  { id:'concur-basics', cat:'concur', title:'concurrency basics', concepts:[
+    { name:'std::thread / jthread (C++20)', desc:'jthread auto-joins on destruction and supports stop tokens.',
+      code:`std::<span class="ty">jthread</span> t([](<span class="ty">std::stop_token</span> st) {
+  <span class="kw">while</span> (!st.<span class="fn">stop_requested</span>()) {
+    <span class="fn">work</span>();
+  }
+});
+<span class="cm">// auto-joined at scope exit</span>` },
+    { name:'mutex / lock_guard',
+      code:`std::<span class="ty">mutex</span> mtx;
+{
+  std::<span class="ty">lock_guard</span> lk(mtx); <span class="cm">// CTAD C++17</span>
+  shared_data++;
+}` },
+    { name:'std::atomic', desc:'Lock-free operations on primitive types.',
+      code:`std::<span class="ty">atomic</span>&lt;<span class="kw">int</span>&gt; counter{<span class="li">0</span>};
+counter.<span class="fn">fetch_add</span>(<span class="li">1</span>,
+  std::<span class="ty">memory_order_relaxed</span>);`, tip:'Use memory_order_relaxed only for independent counters. Default seq_cst is safest.' },
+    { name:'future / async',
+      code:`<span class="kw">auto</span> fut = std::<span class="fn">async</span>(std::<span class="ty">launch::async</span>,
+  [] { <span class="kw">return</span> <span class="fn">compute</span>(); });
+<span class="kw">int</span> result = fut.<span class="fn">get</span>();` },
+  ]},
+];
+
+// ── Build DOM ──
+function renderAll(items) {
+  const root = document.getElementById('content-root');
+  root.innerHTML = '';
+  // Group by category in order
+  const catOrder = ['lang','arch','perf','mem','safe','concur'];
+  const catLabels = { lang:'Language Mastery', arch:'Architecture', perf:'Performance', mem:'Memory', safe:'Safety', concur:'Concurrency' };
+  const grouped = {};
+  for (const d of items) {
+    if (!grouped[d.cat]) grouped[d.cat] = [];
+    grouped[d.cat].push(d);
+  }
+  for (const cat of catOrder) {
+    if (!grouped[cat]) continue;
+    const meta = CAT_META[cat];
+    const section = document.createElement('div');
+    section.className = 'category-section';
+    section.dataset.cat = cat;
+    section.innerHTML = `<div class="category-header">
+      <h2>${catLabels[cat]}</h2>
+      <span class="cat-badge" style="background:${meta.bg};color:${meta.color}">${meta.label}</span>
+    </div>
+    <div class="cards-grid"></div>`;
+    const grid = section.querySelector('.cards-grid');
+    for (const d of grouped[cat]) {
+      grid.appendChild(buildCard(d));
+    }
+    root.appendChild(section);
+  }
+}
+
+function buildCard(d) {
+  const meta = CAT_META[d.cat];
+  const div = document.createElement('div');
+  div.className = 'card';
+  div.id = d.id;
+  div.dataset.cat = d.cat;
+  div.dataset.text = d.title + ' ' + d.concepts.map(c => c.name + ' ' + (c.desc||'')).join(' ');
+
+  let body = '';
+  for (const c of d.concepts) {
+    body += `<div class="concept">
+      <div class="concept-name">${c.name}</div>
+      ${c.desc ? `<div class="concept-desc">${c.desc}</div>` : ''}
+      ${c.code ? `<pre>${c.code}</pre>` : ''}
+      ${c.tip  ? `<div class="tip">${c.tip}</div>` : ''}
+    </div>`;
+  }
+  div.innerHTML = `<div class="card-head">
+    <h3>${d.title}</h3>
+    <span class="cat-badge" style="background:${meta.bg};color:${meta.color}">${meta.label}</span>
+  </div>
+  <div class="card-body">${body}</div>`;
+  return div;
+}
+
+renderAll(DATA);
+
+// ── Filter buttons ──
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    filterView(cat, '');
+    document.getElementById('search-input').value = '';
+  });
+});
+
+function filterView(cat, query) {
+  let visible = 0;
+  document.querySelectorAll('.card').forEach(card => {
+    const catMatch = cat === 'all' || card.dataset.cat === cat;
+    const qMatch   = !query || card.dataset.text.toLowerCase().includes(query.toLowerCase());
+    const show = catMatch && qMatch;
+    card.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.querySelectorAll('.category-section').forEach(sec => {
+    const hasVisible = [...sec.querySelectorAll('.card')].some(c => c.style.display !== 'none');
+    sec.style.display = hasVisible ? '' : 'none';
+  });
+  document.getElementById('no-results').classList.toggle('show', visible === 0);
+}
+
+// ── Search ──
+document.getElementById('search-input').addEventListener('input', e => {
+  const q = e.target.value.trim();
+  const activeCat = document.querySelector('.filter-btn.active').dataset.cat;
+  filterView(activeCat, q);
+});
+
+// ── Active nav link on scroll ──
+const mainEl = document.getElementById('main-content');
+const navLinks = document.querySelectorAll('.nav-link');
+
+mainEl.addEventListener('scroll', () => {
+  const scrollTop = mainEl.scrollTop;
+  document.getElementById('back-top').classList.toggle('visible', scrollTop > 300);
+
+  let current = '';
+  document.querySelectorAll('.card[id]').forEach(card => {
+    if (card.offsetTop - 120 <= scrollTop) current = card.id;
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+});
+
+// Nav link clicks scroll main
+navLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>

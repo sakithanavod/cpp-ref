@@ -399,11 +399,15 @@
 
   <div class="nav-section">
     <div class="nav-section-label">Fundamentals</div>
+    <a class="nav-link" href="#fund-class-anatomy"><span class="nav-dot" style="background:var(--fund)"></span>class anatomy</a>
+    <a class="nav-link" href="#fund-struct-enum"><span class="nav-dot" style="background:var(--fund)"></span>struct &amp; enum</a>
+    <a class="nav-link" href="#fund-types-control"><span class="nav-dot" style="background:var(--fund)"></span>types &amp; control flow</a>
     <a class="nav-link" href="#fund-how-cpp-works"><span class="nav-dot" style="background:var(--fund)"></span>how C++ works</a>
     <a class="nav-link" href="#fund-lvalues-rvalues"><span class="nav-dot" style="background:var(--fund)"></span>lvalues &amp; rvalues</a>
     <a class="nav-link" href="#fund-stack-heap"><span class="nav-dot" style="background:var(--fund)"></span>stack vs heap</a>
     <a class="nav-link" href="#fund-refs-ptrs"><span class="nav-dot" style="background:var(--fund)"></span>refs vs pointers</a>
     <a class="nav-link" href="#fund-const"><span class="nav-dot" style="background:var(--fund)"></span>const &amp; mutable</a>
+    <a class="nav-link" href="#fund-constexpr"><span class="nav-dot" style="background:var(--fund)"></span>const vs constexpr</a>
     <a class="nav-link" href="#fund-static"><span class="nav-dot" style="background:var(--fund)"></span>static keyword</a>
     <a class="nav-link" href="#fund-new"><span class="nav-dot" style="background:var(--fund)"></span>new keyword</a>
     <a class="nav-link" href="#fund-lifetime"><span class="nav-dot" style="background:var(--fund)"></span>object lifetime</a>
@@ -793,6 +797,200 @@ counter.<span class="fn">fetch_add</span>(<span class="li">1</span>,
   ]},
 
   // ── FUNDAMENTALS ──────────────────────────────────────
+  { id:'fund-types-control', cat:'fund', title:'types & control flow', concepts:[
+    { name:'primitive types',
+      code:`<span class="cm">// integer types</span>
+<span class="kw">bool</span>     b = <span class="kw">true</span>;
+<span class="kw">char</span>     c = <span class="st">'A'</span>;
+<span class="kw">int</span>      i = <span class="li">42</span>;
+<span class="kw">long</span>     l = <span class="li">1'000'000L</span>;   <span class="cm">// digit separator</span>
+<span class="kw">long long</span> ll = <span class="li">9e18LL</span>;
+
+<span class="cm">// floating point</span>
+<span class="kw">float</span>  f = <span class="li">3.14f</span>;
+<span class="kw">double</span> d = <span class="li">3.14159</span>;
+
+<span class="cm">// fixed-width (prefer these for portability)</span>
+<span class="cm">#include &lt;cstdint&gt;</span>
+<span class="ty">int32_t</span>  i32;  <span class="ty">uint64_t</span>  u64;
+<span class="ty">int8_t</span>   byte; <span class="ty">size_t</span>    sz;` },
+    { name:'type aliases',
+      code:`<span class="kw">using</span> <span class="ty">Seconds</span> = <span class="kw">double</span>;          <span class="cm">// C++11 (prefer)</span>
+<span class="kw">typedef unsigned int</span> <span class="ty">uint</span>;       <span class="cm">// C-style</span>
+<span class="kw">using</span> <span class="ty">Callback</span> = <span class="kw">void</span>(*)(<span class="kw">int</span>);   <span class="cm">// function ptr alias</span>
+<span class="kw">using</span> <span class="ty">Vec</span> = std::vector&lt;<span class="kw">int</span>&gt;;` },
+    { name:'if / else / switch',
+      code:`<span class="kw">if</span> (x &gt; <span class="li">0</span>) { <span class="cm">/* ... */</span> }
+<span class="kw">else if</span> (x == <span class="li">0</span>) { <span class="cm">/* ... */</span> }
+<span class="kw">else</span> { <span class="cm">/* ... */</span> }
+
+<span class="cm">// if with init (C++17)</span>
+<span class="kw">if</span> (<span class="kw">auto</span> v = <span class="fn">find</span>(key); v != <span class="kw">nullptr</span>) { <span class="fn">use</span>(*v); }
+
+<span class="kw">switch</span> (day) {
+  <span class="kw">case</span> <span class="li">0</span>: <span class="fn">doSunday</span>(); <span class="kw">break</span>;
+  <span class="kw">case</span> <span class="li">6</span>: <span class="fn">doSaturday</span>(); <span class="kw">break</span>;
+  <span class="kw">default</span>: <span class="fn">doWeekday</span>(); <span class="kw">break</span>;
+}` },
+    { name:'loops',
+      code:`<span class="kw">for</span> (<span class="kw">int</span> i = <span class="li">0</span>; i &lt; n; ++i) { }      <span class="cm">// classic</span>
+<span class="kw">for</span> (<span class="kw">const auto</span>&amp; x : container) { }   <span class="cm">// range-for</span>
+<span class="kw">while</span> (cond) { }
+<span class="kw">do</span> { } <span class="kw">while</span> (cond);
+
+<span class="kw">break</span>;      <span class="cm">// exit loop</span>
+<span class="kw">continue</span>;   <span class="cm">// next iteration</span>` },
+    { name:'auto & type inference',
+      code:`<span class="kw">auto</span> x = <span class="li">42</span>;            <span class="cm">// int</span>
+<span class="kw">auto</span> s = std::<span class="ty">string</span>{}; <span class="cm">// std::string</span>
+<span class="kw">auto</span> [a,b] = pair;       <span class="cm">// structured binding</span>
+<span class="kw">auto</span> fn = [](<span class="kw">int</span> x){ <span class="kw">return</span> x*<span class="li">2</span>; }; <span class="cm">// lambda</span>`, tip:'Prefer auto for complex types but use explicit types for clarity on simple ones like int or bool.' },
+  ]},
+
+  { id:'fund-struct-enum', cat:'fund', title:'struct & enum', concepts:[
+    { name:'struct — simple data bundle',
+      code:`<span class="kw">struct</span> <span class="ty">Point</span> {
+  <span class="kw">float</span> x = <span class="li">0.0f</span>;    <span class="cm">// member with default</span>
+  <span class="kw">float</span> y = <span class="li">0.0f</span>;
+};
+
+<span class="ty">Point</span> p;              <span class="cm">// zero-initialised</span>
+<span class="ty">Point</span> q{<span class="li">1.0f</span>, <span class="li">2.0f</span>}; <span class="cm">// aggregate init</span>
+<span class="ty">Point</span> r = {.x=<span class="li">3.f</span>, .y=<span class="li">4.f</span>}; <span class="cm">// designated init C++20</span>
+q.x = <span class="li">5.0f</span>;
+<span class="kw">auto</span> [px, py] = q;   <span class="cm">// structured binding</span>`, tip:'struct members are public by default; class members are private by default. Otherwise identical.' },
+    { name:'struct with methods',
+      code:`<span class="kw">struct</span> <span class="ty">Rect</span> {
+  <span class="kw">float</span> w, h;
+
+  <span class="kw">float</span> <span class="fn">area</span>()  <span class="kw">const</span> { <span class="kw">return</span> w * h; }
+  <span class="kw">float</span> <span class="fn">perimeter</span>() <span class="kw">const</span> { <span class="kw">return</span> <span class="li">2</span>*(w+h); }
+  <span class="kw">bool</span>  <span class="fn">isSquare</span>() <span class="kw">const</span> { <span class="kw">return</span> w == h; }
+  <span class="kw">void</span>  <span class="fn">scale</span>(<span class="kw">float</span> f) { w*=f; h*=f; }
+};` },
+    { name:'enum class (scoped)',
+      code:`<span class="kw">enum class</span> <span class="ty">Direction</span> : <span class="kw">uint8_t</span> {
+  North, South, East, West
+};
+
+<span class="ty">Direction</span> d = <span class="ty">Direction</span>::North;
+<span class="cm">// int i = d;          // error — no implicit conv</span>
+<span class="kw">auto</span> raw = <span class="kw">static_cast</span>&lt;<span class="kw">uint8_t</span>&gt;(d);  <span class="cm">// ok</span>
+
+<span class="kw">switch</span> (d) {
+  <span class="kw">case</span> <span class="ty">Direction</span>::North: <span class="kw">break</span>;
+  <span class="kw">case</span> <span class="ty">Direction</span>::South: <span class="kw">break</span>;
+  <span class="kw">default</span>: <span class="kw">break</span>;
+}` },
+    { name:'plain enum (unscoped — avoid)',
+      code:`<span class="kw">enum</span> <span class="ty">Color</span> { Red, Green, Blue }; <span class="cm">// leaks names</span>
+<span class="kw">int</span> i = Red;   <span class="cm">// implicit conv — often surprising</span>
+<span class="cm">// prefer: enum class Color { Red, Green, Blue };</span>` },
+  ]},
+
+  { id:'fund-class-anatomy', cat:'fund', title:'class anatomy', concepts:[
+    { name:'complete class skeleton',
+      code:`<span class="cm">// myclass.h</span>
+<span class="cm">#pragma once</span>
+<span class="cm">#include &lt;string&gt;</span>
+
+<span class="kw">class</span> <span class="ty">MyClass</span> {
+<span class="kw">public</span>:                          <span class="cm">// ① public interface</span>
+  <span class="kw">explicit</span> <span class="ty">MyClass</span>(<span class="kw">int</span> value);  <span class="cm">// constructor</span>
+  ~<span class="ty">MyClass</span>();                   <span class="cm">// destructor</span>
+
+  <span class="ty">MyClass</span>(<span class="kw">const</span> <span class="ty">MyClass</span>&amp;);            <span class="cm">// copy ctor</span>
+  <span class="ty">MyClass</span>&amp; <span class="kw">operator</span>=(<span class="kw">const</span> <span class="ty">MyClass</span>&amp;); <span class="cm">// copy assign</span>
+  <span class="ty">MyClass</span>(<span class="ty">MyClass</span>&amp;&amp;) <span class="kw">noexcept</span>;        <span class="cm">// move ctor</span>
+  <span class="ty">MyClass</span>&amp; <span class="kw">operator</span>=(<span class="ty">MyClass</span>&amp;&amp;) <span class="kw">noexcept</span>; <span class="cm">// move assign</span>
+
+  <span class="kw">int</span>  <span class="fn">value</span>()  <span class="kw">const</span>;         <span class="cm">// getter</span>
+  <span class="kw">void</span> <span class="fn">setValue</span>(<span class="kw">int</span> v);         <span class="cm">// setter</span>
+  <span class="ty">std::string</span> <span class="fn">describe</span>() <span class="kw">const</span>;<span class="cm">// method</span>
+
+<span class="kw">protected</span>:                       <span class="cm">// ② subclass-visible</span>
+  <span class="kw">void</span> <span class="fn">helperForSubclasses</span>();
+
+<span class="kw">private</span>:                         <span class="cm">// ③ implementation</span>
+  <span class="kw">int</span> value_;                    <span class="cm">// data member</span>
+  <span class="kw">static int</span> instanceCount_;    <span class="cm">// shared across all</span>
+};` },
+    { name:'member layout convention', desc:'A widely-used ordering that makes headers easy to read at a glance.',
+      code:`<span class="kw">class</span> <span class="ty">Widget</span> {
+<span class="kw">public</span>:
+  <span class="cm">// 1. types & aliases</span>
+  <span class="kw">using</span> <span class="ty">Id</span> = <span class="kw">uint32_t</span>;
+
+  <span class="cm">// 2. static members / factories</span>
+  <span class="kw">static</span> <span class="ty">Widget</span> <span class="fn">create</span>(<span class="ty">Id</span>);
+
+  <span class="cm">// 3. constructors / destructor</span>
+  <span class="kw">explicit</span> <span class="ty">Widget</span>(<span class="ty">Id</span>);
+  ~<span class="ty">Widget</span>();
+
+  <span class="cm">// 4. operators</span>
+  <span class="kw">bool</span> <span class="kw">operator</span>==(<span class="kw">const</span> <span class="ty">Widget</span>&amp;) <span class="kw">const</span>;
+
+  <span class="cm">// 5. methods (non-mutating first, then mutating)</span>
+  <span class="ty">Id</span>   <span class="fn">id</span>()     <span class="kw">const</span>;
+  <span class="kw">void</span> <span class="fn">render</span>();
+
+<span class="kw">private</span>:
+  <span class="cm">// 6. data members (trailing underscore convention)</span>
+  <span class="ty">Id</span> id_;
+};` },
+    { name:'implementation file',
+      code:`<span class="cm">// myclass.cpp</span>
+<span class="cm">#include "myclass.h"</span>
+
+<span class="kw">int</span> <span class="ty">MyClass</span>::instanceCount_ = <span class="li">0</span>; <span class="cm">// define static</span>
+
+<span class="ty">MyClass</span>::<span class="ty">MyClass</span>(<span class="kw">int</span> value)
+  : value_(value)               <span class="cm">// init list</span>
+{
+  ++instanceCount_;
+}
+
+<span class="ty">MyClass</span>::~<span class="ty">MyClass</span>() {
+  --instanceCount_;
+}
+
+<span class="kw">int</span> <span class="ty">MyClass</span>::<span class="fn">value</span>() <span class="kw">const</span> { <span class="kw">return</span> value_; }
+
+<span class="kw">void</span> <span class="ty">MyClass</span>::<span class="fn">setValue</span>(<span class="kw">int</span> v) { value_ = v; }` },
+    { name:'access specifiers at a glance',
+      code:`<span class="cm">// public    — anyone can access</span>
+<span class="cm">// protected — this class + derived classes</span>
+<span class="cm">// private   — this class only (default for class)</span>
+
+<span class="cm">// friend — grants a specific class/function access</span>
+<span class="kw">friend class</span> <span class="ty">Serializer</span>;
+<span class="kw">friend</span> <span class="ty">std::ostream</span>&amp; <span class="kw">operator</span>&lt;&lt;(<span class="ty">std::ostream</span>&amp;, <span class="kw">const</span> <span class="ty">MyClass</span>&amp;);` },
+    { name:'this pointer',
+      desc:'Every non-static method receives an implicit pointer to its own object.',
+      code:`<span class="kw">void</span> <span class="ty">MyClass</span>::<span class="fn">setValue</span>(<span class="kw">int</span> value) {
+  <span class="kw">this</span>-&gt;value_ = value;  <span class="cm">// disambiguate same name</span>
+}
+
+<span class="cm">// method chaining with *this</span>
+<span class="ty">Builder</span>&amp; <span class="ty">Builder</span>::<span class="fn">setName</span>(<span class="ty">std::string</span> n) {
+  name_ = std::<span class="fn">move</span>(n);
+  <span class="kw">return</span> *<span class="kw">this</span>;         <span class="cm">// enables b.setName("x").setAge(5)</span>
+}` },
+    { name:'rule of 0 / 3 / 5',
+      desc:'Guidelines for when to define special member functions.',
+      code:`<span class="cm">// Rule of 0 — BEST: let compiler generate all 5</span>
+<span class="kw">class</span> <span class="ty">Good</span> {
+  std::<span class="ty">vector</span>&lt;<span class="kw">int</span>&gt; data_; <span class="cm">// RAII member handles it</span>
+};
+
+<span class="cm">// Rule of 5 — if you define ANY of these, define ALL:</span>
+<span class="cm">//   destructor, copy ctor, copy assign,</span>
+<span class="cm">//   move ctor,  move assign</span>
+
+<span class="cm">// Rule of 3 — pre-C++11: dtor, copy ctor, copy assign</span>`, tip:'Aim for Rule of 0 by using smart pointers and RAII wrappers — let the compiler do the work.' },
+  ]},
+
   { id:'fund-how-cpp-works', cat:'fund', title:'how C++ works', concepts:[
     { name:'source → executable pipeline', desc:'C++ is compiled ahead-of-time. Each .cpp file is an independent translation unit (TU).',
       code:`<span class="cm">// 1. PREPROCESSOR  (.cpp → expanded source)</span>
@@ -931,28 +1129,119 @@ p++;                  <span class="cm">// arithmetic</span>` },
 <span class="cm">// prefer ref   need ptr for arrays/optional</span>`, tip:'Pass by const ref for read-only params; by pointer only when null is meaningful.' },
   ]},
   { id:'fund-const', cat:'fund', title:'const & mutable', concepts:[
-    { name:'const basics',
-      code:`<span class="kw">const int</span> x = <span class="li">42</span>;        <span class="cm">// immutable value</span>
-<span class="kw">const int</span>* p = &amp;x;       <span class="cm">// ptr to const int</span>
-<span class="kw">int</span>* <span class="kw">const</span> q = &amp;x;       <span class="cm">// const ptr to int</span>
-<span class="kw">const int</span>* <span class="kw">const</span> r = &amp;x; <span class="cm">// const ptr to const</span>`, tip:"Read right-to-left: 'const int*' = pointer to const int." },
-    { name:'const member functions', desc:'Promises not to modify the object. Can be called on const instances.',
+    { name:'const on variables', desc:'Marks a variable immutable after initialisation. The initialiser can be a runtime value.',
+      code:`<span class="kw">const int</span> x = <span class="li">42</span>;           <span class="cm">// immutable int</span>
+<span class="kw">const</span> <span class="ty">std::string</span> s = <span class="fn">getStr</span>(); <span class="cm">// runtime value ok</span>
+<span class="cm">// x = 5;  // error — cannot assign to const</span>` },
+    { name:'const & pointers — read right-to-left',
+      code:`<span class="kw">const int</span>* p  = &amp;x;       <span class="cm">// ptr to const int    (data immutable)</span>
+<span class="kw">int</span>* <span class="kw">const</span> q  = &amp;x;       <span class="cm">// const ptr to int    (pointer immutable)</span>
+<span class="kw">const int</span>* <span class="kw">const</span> r = &amp;x; <span class="cm">// const ptr to const  (both immutable)</span>
+
+<span class="cm">// tip: read right-to-left past the *</span>
+<span class="cm">// "const int *"  →  pointer | to const int</span>
+<span class="cm">// "int * const"  →  const pointer | to int</span>`, tip:'East-const style (int const*) is consistent: const always applies to what is immediately to its left.' },
+    { name:'const references — the most common use', desc:'Pass large objects cheaply without copying. The most important everyday use of const.',
+      code:`<span class="cm">// BAD — copies the whole string</span>
+<span class="kw">void</span> <span class="fn">print</span>(<span class="ty">std::string</span> s);
+
+<span class="cm">// GOOD — zero-copy read-only view</span>
+<span class="kw">void</span> <span class="fn">print</span>(<span class="kw">const</span> <span class="ty">std::string</span>&amp; s);
+
+<span class="cm">// ALSO GOOD — string_view for string literals too</span>
+<span class="kw">void</span> <span class="fn">print</span>(<span class="ty">std::string_view</span> s);`, tip:'Rule of thumb: pass primitives (int, float) by value; pass everything else by const ref unless you need a copy or to move.' },
+    { name:'const member functions', desc:'Promises not to modify the object. Required to call methods on const objects.',
       code:`<span class="kw">struct</span> <span class="ty">Vec2</span> {
   <span class="kw">float</span> x, y;
-  <span class="kw">float</span> <span class="fn">length</span>() <span class="kw">const</span>;  <span class="cm">// read-only</span>
-  <span class="kw">void</span>  <span class="fn">normalise</span>();     <span class="cm">// mutating</span>
-};` },
-    { name:'mutable', desc:'Allows a member to be modified even inside a const method. Use for caches/lazy computation.',
+  <span class="kw">float</span> <span class="fn">length</span>() <span class="kw">const</span>;  <span class="cm">// safe on const Vec2</span>
+  <span class="kw">void</span>  <span class="fn">normalise</span>();     <span class="cm">// mutating — not const</span>
+};
+
+<span class="kw">const</span> <span class="ty">Vec2</span> v{<span class="li">3</span>,<span class="li">4</span>};
+v.<span class="fn">length</span>();    <span class="cm">// ok</span>
+<span class="cm">// v.normalise(); // error — v is const</span>` },
+    { name:'mutable', desc:'Allows one member to be written inside a const method. Used for lazy caches and mutexes.',
       code:`<span class="kw">struct</span> <span class="ty">Expensive</span> {
-  <span class="kw">mutable int</span> cache = <span class="li">-1</span>;
-  <span class="kw">int</span> <span class="fn">get</span>() <span class="kw">const</span> {
-    <span class="kw">if</span> (cache &lt; <span class="li">0</span>) cache = <span class="fn">compute</span>();
-    <span class="kw">return</span> cache;
+  <span class="kw">mutable int</span>             cache_  = <span class="li">-1</span>;
+  <span class="kw">mutable</span> <span class="ty">std::mutex</span>      mutex_;
+  <span class="kw">int</span> <span class="fn">get</span>() <span class="kw">const</span> {             <span class="cm">// const method</span>
+    <span class="ty">std::lock_guard</span> lk(mutex_);  <span class="cm">// ok — mutable</span>
+    <span class="kw">if</span> (cache_ &lt; <span class="li">0</span>) cache_ = <span class="fn">compute</span>();
+    <span class="kw">return</span> cache_;
   }
-};` },
-    { name:'constexpr vs const',
-      code:`<span class="kw">const int</span>     n = <span class="fn">runtime_val</span>(); <span class="cm">// runtime ok</span>
-<span class="kw">constexpr int</span> m = <span class="li">42</span>;            <span class="cm">// compile-time</span>` },
+};`, tip:'mutable should represent "logically const" state — caching or thread-safety bookkeeping. Never use it to sneak mutations past the const interface.' },
+  ]},
+
+  { id:'fund-constexpr', cat:'fund', title:'const vs constexpr', concepts:[
+    { name:'the core difference',
+      code:`<span class="cm">// const — value fixed after init, init can be runtime</span>
+<span class="kw">const int</span> n = <span class="fn">readFromFile</span>();   <span class="cm">// ok</span>
+<span class="kw">const int</span> m = <span class="li">42</span>;               <span class="cm">// also ok</span>
+
+<span class="cm">// constexpr — value MUST be known at compile time</span>
+<span class="kw">constexpr int</span> k = <span class="li">42</span>;           <span class="cm">// ok — literal</span>
+<span class="kw">constexpr int</span> p = <span class="li">6</span> * <span class="li">7</span>;       <span class="cm">// ok — constant expr</span>
+<span class="cm">// constexpr int q = readFromFile(); // ERROR</span>`, tip:'constexpr implies const — a constexpr variable is always const, but not the other way around.' },
+    { name:'when to use constexpr — primitives ✓', desc:'The primary home of constexpr. Replaces #define for numeric/boolean constants.',
+      code:`<span class="cm">// PREFER constexpr over #define and over const</span>
+<span class="kw">constexpr int</span>    kMaxRetries  = <span class="li">3</span>;
+<span class="kw">constexpr double</span> kPi          = <span class="li">3.14159265358979</span>;
+<span class="kw">constexpr bool</span>   kDebugBuild  = <span class="kw">false</span>;
+<span class="kw">constexpr</span> <span class="ty">std::size_t</span> kBufSize = <span class="li">1024</span>;
+
+<span class="cm">// usable as array size, template arg, case label</span>
+<span class="kw">int</span> buf[kBufSize];
+<span class="kw">std::array</span>&lt;<span class="kw">int</span>, kMaxRetries&gt; arr;` },
+    { name:'when to use const — runtime values ✓', desc:'Use const when the value is only known at runtime but must not change after init.',
+      code:`<span class="kw">const int</span> argc_copy = argc;          <span class="cm">// runtime arg</span>
+<span class="kw">const</span> <span class="ty">std::string</span> config = <span class="fn">loadCfg</span>(); <span class="cm">// file IO</span>
+<span class="kw">const</span> <span class="kw">auto</span> result    = <span class="fn">compute</span>();     <span class="cm">// expensive calc</span>
+
+<span class="cm">// const in function parameters</span>
+<span class="kw">void</span> <span class="fn">process</span>(<span class="kw">const int</span> id, <span class="kw">const</span> <span class="ty">Config</span>&amp; cfg);` },
+    { name:'constexpr functions', desc:'Can be evaluated at compile time if given compile-time arguments, otherwise runs at runtime.',
+      code:`<span class="kw">constexpr int</span> <span class="fn">factorial</span>(<span class="kw">int</span> n) {
+  <span class="kw">return</span> n &lt;= <span class="li">1</span> ? <span class="li">1</span> : n * <span class="fn">factorial</span>(n - <span class="li">1</span>);
+}
+
+<span class="kw">constexpr int</span> f5 = <span class="fn">factorial</span>(<span class="li">5</span>); <span class="cm">// compile-time: 120</span>
+<span class="kw">int</span> n = <span class="fn">getUserInput</span>();
+<span class="kw">int</span> fn = <span class="fn">factorial</span>(n);           <span class="cm">// runtime: fine</span>` },
+    { name:'constexpr for classes (C++14+)', desc:'A class is usable in constexpr context if its constructor and methods are constexpr.',
+      code:`<span class="kw">struct</span> <span class="ty">Point</span> {
+  <span class="kw">float</span> x, y;
+  <span class="kw">constexpr</span> <span class="ty">Point</span>(<span class="kw">float</span> x, <span class="kw">float</span> y) : x(x), y(y) {}
+  <span class="kw">constexpr float</span> <span class="fn">dist2</span>() <span class="kw">const</span> { <span class="kw">return</span> x*x + y*y; }
+};
+
+<span class="kw">constexpr</span> <span class="ty">Point</span> origin{<span class="li">0</span>, <span class="li">0</span>};    <span class="cm">// compile-time</span>
+<span class="kw">constexpr float</span> d = origin.<span class="fn">dist2</span>(); <span class="cm">// compile-time: 0</span>`, tip:'std::array, std::string (C++20), std::vector (C++20) are all constexpr-capable.' },
+    { name:'consteval — compile-time only (C++20)', desc:'Stronger than constexpr — the function MUST be evaluated at compile time. Error if called with runtime args.',
+      code:`<span class="kw">consteval int</span> <span class="fn">square</span>(<span class="kw">int</span> n) { <span class="kw">return</span> n * n; }
+
+<span class="kw">constexpr int</span> a = <span class="fn">square</span>(<span class="li">5</span>);  <span class="cm">// ok — 25</span>
+<span class="kw">int</span> x = <span class="li">5</span>;
+<span class="cm">// int b = square(x);  // ERROR — x not constexpr</span>` },
+    { name:'constinit — guaranteed static init (C++20)', desc:'Ensures a static/global variable is initialised at compile time, preventing the static init order fiasco. Does not imply const.',
+      code:`<span class="kw">constinit int</span> counter = <span class="li">0</span>;   <span class="cm">// zero at startup</span>
+counter++;                       <span class="cm">// still mutable!</span>
+
+<span class="cm">// vs constexpr — immutable:</span>
+<span class="kw">constexpr int</span> limit = <span class="li">100</span>;    <span class="cm">// can't change</span>`, tip:'Use constinit for globals/statics you want to mutate but guarantee are safely initialised before any code runs.' },
+    { name:'decision guide',
+      code:`<span class="cm">// Is the value known at compile time?</span>
+<span class="cm">//   YES → constexpr (primitives, math, lookup tables)</span>
+<span class="cm">//   NO  → const (runtime results, user input, IO)</span>
+
+<span class="cm">// Is it a function that CAN be compile-time?</span>
+<span class="cm">//   YES → constexpr function</span>
+<span class="cm">//   MUST be compile-time → consteval (C++20)</span>
+
+<span class="cm">// Global/static — want safe init, still mutable?</span>
+<span class="cm">//   → constinit (C++20)</span>
+
+<span class="cm">// Class member modified inside const method?</span>
+<span class="cm">//   → mutable</span>` },
   ]},
   { id:'fund-static', cat:'fund', title:'static keyword', concepts:[
     { name:'static local variable', desc:'Initialised once, lifetime = program. Thread-safe since C++11.',
